@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<books>
+  <book isbn="9572054651">
+   <title>XML 超級手冊 (The XML Handbook, 3/e)</title>
+   <publisher>培生</publisher>
+   <price>624</price>
+  <author>高卉芸</author>
+  </book>
+  <book isbn="9867485815">
+   <title>精彩 XML 新世代網頁設計</title>
+   <publisher>網奕資訊</publisher>
+   <price>357</price>
+    <author>黃泳瑜</author>
+  </book>
+  <book isbn="9867944658">
+   <title>XML 應用寶典--輕鬆體驗 Web Service</title>
+   <publisher>上奇科技</publisher>
+   <price>476</price>
+    <author>劉宗億</author>
+  </book>
+  <book isbn="9574669106">
+   <title>Java 與 XML 整合應用</title>
+   <publisher>文魁</publisher>
+   <price>312</price>
+    <author>周政宏</author>
+  </book>
+  <book isbn="9574668916">
+   <title>XML 入門與應用</title>
+   <publisher>SK</publisher>
+   <price>464</price>
+    <author>陳長念</author>
+  </book>
+</books>
+

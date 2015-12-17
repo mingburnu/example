@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>05font.html</title>
+        <script>
+            window.onload=function(){
+              var canvas = document.getElementById("myCanvas");
+              var context = canvas.getContext("2d");        
+              
+              context.moveTo(250,0);
+              context.lineTo(250,400);
+              context.stroke();
+              
+              context.moveTo(0,200);
+              context.lineTo(500,200);
+              context.stroke();
+              
+              var x = canvas.width/2;          
+              var y = canvas.height/2;  
+            
+              context.font="30pt Calibir";
+              context.textAlign="left";
+              context.textBaseline="top";
+              context.strokeStyle="blue";
+              context.strokeText("Hello Canvas Text!",x,y);
+            
+            
+              context.fillStyle="purple";
+              context.fillText("Hello Canvas Text!",x,y);
+          }
+        </script>
+    </head>
+    <body style="margin-top: 0px;margin-left: 0px;">
+      <canvas id="myCanvas" style="background-color:pink;" width="500px" height="400px"></canvas>
+    </body>
+
+</html>

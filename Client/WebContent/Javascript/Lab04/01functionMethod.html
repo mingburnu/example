@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01functionMethod.html</title>	
+		<script>
+			//Method 1
+			function fAdd1(a,b){
+				return(a+b);
+			}
+			document.write("fAdd1(10,20)="+fAdd1(10,20)+"<hr>");
+			
+			//Method 2
+			var fAdd2=function(a,b){
+				return(a+b);
+			}
+			document.write("fAdd2(20,20)="+fAdd2(20,20)+"<hr>");
+			
+			//Method 3
+			var fAdd3=new Function("a","b","return(a+b);");				
+			document.write("fAdd3(20,30)="+fAdd3(20,30)+"<hr>");
+			
+		</script>	
+	</head>
+
+	<body>
+		
+	</body>
+</html>

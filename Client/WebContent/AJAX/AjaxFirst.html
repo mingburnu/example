@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+ /* window.addEventListener("load", init, false);
+  function init(){
+	  var btnLoad = document.getElementById("buttonLoad");
+	  btnLoad.addEventListener("click",	load, false);
+	  
+  }
+
+  function load(){
+	  alert('click');
+  }*/
+</script>
+</head>
+<body>
+<input type="text"><br>
+<input type="text"><br>
+<input type="text"><br>
+<input type="button" value="Load" id="buttonLoad">
+<div id="div1"></div>
+<script>
+ 
+var btnLoad = document.getElementById("buttonLoad");
+btnLoad.addEventListener("click", load, false);
+function load(){
+	 //開始Ajax程式
+	 //步驟一建立XMLHttpRequest物件
+	 var xmlHttp = new XMLHttpRequest();
+	 
+	 //步驟二對Server端發出要求
+	 xmlHttp.open("get", "First.jsp", false);
+	 xmlHttp.send();
+	 
+	 //步驟三接收Server端回應的資料
+	 var data = xmlHttp.responseText;
+	 
+	 //將資料顯示在網頁上
+	 var myDiv = document.getElementById("div1");
+	 myDiv.innerHTML = "<h2>" + data + "</h2>";
+	 
+}
+</script>
+</body>
+</html>

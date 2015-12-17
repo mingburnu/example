@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+		
+		<style>
+			table {border:3px solid #00aa00;
+				   width:400px;
+				   border-collapse:collapse;
+				   margin:30px auto;
+			}
+			td,th {border:1px solid #888888;}
+			thead {background-color:yellow;
+				   border-bottom:3px double #aa7700;
+				   text-transform:uppercase;
+			}
+			tbody {background-color:orange;
+				   text-align:center;
+				   vertical-align:middle;
+			}
+			tbody tr:nth-child(2n){background-color:#ffcc22;}
+			tbody tr:nth-child(2n+1){background-color:#ffaa33;}
+			tbody tr:hover{background-color:#ffffff;}
+		</style>
+		<script>
+			//javascript寫在這裡
+		</script>
+	</head>
+	<body>
+		<table>
+			<caption><h4>表格標題</h4></caption>
+			<thead>
+			<tr>
+				<th>a</th>
+				<th>b</th>
+				<th>c</th>
+				<th>d</th>
+			</tr>
+			<tr>
+				<th colspan="2">a</th>
+				
+				<th colspan="2">c</th>
+				
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td rowspan="4">1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			</tbody>
+		</table>
+		<hr>
+		<h4>高度固定</h4>
+		<div style="border:1px solid red;width:100px;height:100px;line-height:100px">文字垂直對齊</div>
+		<hr>
+		<h4>高度不固定</h4>
+		<div style="border:1px solid red;width:100px;padding-top:50px;padding-bottom:50px;">文字垂直對齊</div>
+	</body>
+</html>

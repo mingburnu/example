@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery Homework1</title>
+<style>
+table {
+	width: 300px;
+	border: 1px solid black;
+	border-collapse: collapse
+}
+
+td,th {
+	width: 100px;
+	border: 1px solid black;
+	padding: 3px
+}
+</style>
+
+</head>
+<body>
+
+	<table id="table1">
+		<thead>
+			<tr>
+				<th>Col1</th>
+				<th>Col2</th>
+				<th>Col3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>A0</td>
+				<td>B1</td>
+				<td>C2</td>
+			</tr>
+			<tr>
+				<td>D3</td>
+				<td>E4</td>
+				<td>F5</td>
+			</tr>
+			<tr>
+				<td>G6</td>
+				<td>H7</td>
+				<td>I8</td>
+			</tr>
+			<tr>
+				<td>A0</td>
+				<td>B1</td>
+				<td>C2</td>
+			</tr>
+			<tr>
+				<td>D3</td>
+				<td>E4</td>
+				<td>F5</td>
+			</tr>
+			<tr>
+				<td>G6</td>
+				<td>H7</td>
+				<td>I8</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script src="Scripts/jquery-1.11.0.min.js"></script>
+	<script>
+		//1.表格中的欄位名稱設定成 背景色blue,字white  background-color:blue color:white
+		//2.表格中的資料偶數列 背景色pink
+		//3.表格中的資料奇數列 背景色orange
+		//4.滑鼠移到每一列的資料時背景色變成yellow
+		//5.滑鼠點選某一列資料時背景色變成purple
+		$('td:even').css('background', 'blue').css('color', 'white');
+		$('tr:even').css('background', 'pink');
+		$('tr:odd').css('background', 'orange');
+		$('tr').mouseover(function() {
+			$(this).css('background', 'yellow');
+		}).click(function() {
+			$(this).css('background', 'purple');
+		});
+		
+	</script>
+</body>
+</html>

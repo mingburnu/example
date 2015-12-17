@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery Homework2</title>
+
+
+</head>
+<body>
+<input type="text"  title="userName" placeholder="姓名"><br>
+<input type="text"  title="email" placeholder="電子郵件"><br>
+<input type="text"  title="phone" placeholder="電話"><br>
+
+
+
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+ <script>
+	//1. 網頁載入時將文字方塊的title屬性值放到value屬性中 attr("title") val("abcd")
+	//2. 將value屬性中字的顏色,設定成銀色color：silver
+	//3. 滑鼠點選文字方塊時,如果value屬性的值等於title屬性的值,清除value屬性的值,並且將顏色設定成黑色
+	//onfocus -> focus
+	//4. 滑鼠離開文字方塊時,如果value屬性的值是空字串,就將title屬性值放到value屬性中,並且將顏色設定成銀色
+    //onblur -> blur
+    var input = document.createElement("input");
+    if(!('placeholder' in input)){
+    	$(':text').each(function(){
+    		 var title = $(this).attr("title");
+    		 //console.log(title);
+    		 $(this).val(title).css('color','silver');
+    	  }).focus(function(){
+    		  if($(this).val() == $(this).attr("title")){
+    		      $(this).val("").css('color','black');
+    		  }
+    	  }).blur(function(){
+    		  if($(this).val() == ""){
+    			  var title = $(this).attr("title");
+    			  $(this).val(title).css('color','silver');
+    		  }
+    	  });
+    }
+
+ </script>
+</body>
+</html>

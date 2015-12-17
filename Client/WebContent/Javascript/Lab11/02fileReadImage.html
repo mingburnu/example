@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>02fileReadImage.html</title>
+        <style>
+         #dropZone  {
+             width:600px;height:300px;border:1px solid blue;float:left
+        	}
+         .thumb{
+         	 height:75px;margin:5px;
+        	}
+        
+        </style>
+        
+        <script>
+            function fileViewer(){
+              	var theFiles=document.getElementById("file1").files;
+                for(var i=0;i<theFiles.length;i++){
+                	
+                	
+                	var reader=new FileReader();
+                	reader.readAsDataURL(theFiles[i]);
+                	
+                	reader.onload=function(e){
+                		var fileContent=e.target.result;
+                		
+                		var eleImg=document.createElement("img");
+                		eleImg.setAttribute("src",fileContent);
+                		eleImg.setAttribute("class","thumb");
+                		
+                		document.getElementById("dropZone").appendChild(eleImg);
+                	}
+                	
+                }
+            }
+        
+        </script>
+
+    </head>
+
+    <body>
+      <input type="file" id="file1" multiple accept="image/*" onchange="fileViewer()"><br>
+      <div id="dropZone"></div>
+    
+    </body>
+
+</html>

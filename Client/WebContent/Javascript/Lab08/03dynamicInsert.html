@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>03dynamicInsert.html</title>	
+		<script>
+		    window.onload = function () {
+		        document.getElementById("butbb").onclick = bb;
+		        document.getElementById("butab").onclick = ab;
+		        document.getElementById("butbe").onclick = be;
+		        document.getElementById("butae").onclick = ae;
+		    }
+
+		    function bb() {
+		        document.getElementById("h").insertAdjacentHTML("BeforeBegin", "add before aaaa")
+		    }
+		    function ab() {
+		        document.getElementById("h").insertAdjacentHTML("AfterBegin", "add before aaaa")
+		    }
+		    function be() {
+		        document.getElementById("h").insertAdjacentHTML("BeforeEnd", "add before zzzzz")
+		    }
+		    function ae() {
+		        document.getElementById("h").insertAdjacentHTML("AfterEnd", "add before zzzzz")
+		    }
+		</script>	
+	</head>
+
+	<body>
+		<h1 id="h" style="background-color:yellow">this is heading 1</h1>
+		<input type="button" id="butbb" value="BeforeBegin" />
+		<input type="button" id="butab" value="AfterBegin" />
+		<input type="button" id="butbe" value="BeforeEnd" />
+		<input type="button" id="butae" value="AfterEnd" />
+	</body>
+</html>

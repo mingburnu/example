@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Async</title>
+<style>
+  #img1{display:none}
+  #div1{border:1px solid green;
+        width:800px;
+        margin:0 auto;
+        padding:4px;
+        box-shadow:3px 2px 5px green;
+        border-radius:15px;
+        font-size:0.8em}
+  #div1>section>hr{clear:left;margin-top:30px;}
+  .s1 {float:left;margin-right:20px;}
+</style>
+</head>
+<body>
+
+<input type="button" value="Load" id="buttonLoad">
+<img src="Images/ajax-loader.gif" id="img1">
+<div id="div1"></div>
+<script>
+ 
+var btnLoad = document.getElementById("buttonLoad");
+//btnLoad.addEventListener("click", load, false);
+btnLoad.onclick = load;
+var xmlHttp;
+function load(){
+	 //開始Ajax程式
+	 //步驟一建立XMLHttpRequest物件
+	 xmlHttp = new XMLHttpRequest();
+	 
+	 //步驟二對Server端發出要求
+	 //當readyState屬性值改變時,就會觸發readystatechange事件
+	 //xmlHttp.addEventListener("readystatechange",callback,false);
+	  xmlHttp.onreadystatechange=callback;
+	 xmlHttp.open("get", "travel.json", true);  //true表示非同步
+	 xmlHttp.send();
+ 
+}
+function callback(){
+	//console.log(xmlHttp.readyState);
+	//readyState == 4表示了server端已經回傳資料到Client端了	
+	if(xmlHttp.readyState == 1){
+		//console.log("aa");
+		document.getElementById("img1").style.display = "inline";
+	}
+	else if(xmlHttp.readyState == 4){
+		document.getElementById("img1").style.display = "none";
+		//xmlHttp.status == 200表示Server端程式執行沒有錯誤
+		if(xmlHttp.status == 200){
+			//步驟三接收Server端回應的資料
+			
+			var datas = eval('(' + xmlHttp.responseText  + ')');
+			
+			//IE8以下瀏覽器不支援
+			//var data = JSON.parse(xmlHttp.responseText);
+			 
+			 //將資料顯示在網頁上  DOM
+			 //alert(datas.length);
+			 //alert(datas[0].agent);
+			 var myDiv = document.getElementById("div1");
+			 for(var i=0,max=datas.length;i<max;i++){
+			    var title = datas[i].title;
+			    var description = datas[i].Description;
+			    var imgurl = datas[i].ImageUrl;
+			    var link = datas[i].link;
+			    
+			    //<h2><a href="link">title</a></h2>
+			    var txtTitle = document.createTextNode(title);
+			    var eleA = document.createElement("a");
+			    eleA.appendChild(txtTitle);
+			    eleA.setAttribute("href", link);
+			    eleA.setAttribute("target","_blank");
+			    var eleH2 = document.createElement("h2");
+			    eleH2.appendChild(eleA);
+			    
+			    //<p>Description</p>
+			    var txtDesc = document.createTextNode(description);
+			    var eleP = document.createElement("p");
+			    eleP.appendChild(txtDesc);
+			    
+			    //<img src="ImageUrl">
+			    var eleImg = document.createElement("img");
+			    eleImg.setAttribute("src", imgurl);
+			    eleImg.setAttribute("class","s1");
+			    
+			    //<hr>
+			    var eleHr = document.createElement("hr");
+			    
+			    var eleSection = document.createElement("section");
+			    eleSection.appendChild(eleH2);
+			    eleSection.appendChild(eleImg);
+			    eleSection.appendChild(eleP);
+			    eleSection.appendChild(eleHr);
+			    
+			    myDiv.appendChild(eleSection);
+			 }
+		}else{
+			alert(xmlHttp.status + ":" + xmlHttp.statusText);
+		}
+	}
+}
+</script>
+</body>
+</html>

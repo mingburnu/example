@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script language="javascript">
+function main(){
+    var canvas = document.getElementById("canvas");
+    canvas.addEventListener("mousemove", function(e){
+        if (!e) e = window.event;
+        var ctx = canvas.getContext("2d");
+
+        var x = e.offsetX;
+        var y = e.offsetY;
+
+        ctx.fillRect(x, y, 1, 1);
+    });
+}
+</script>
+</head>
+<body onload="main();">
+<div style="width: 800px; height: 600px; -webkit-transform: scale(0.75,0.75); -moz-transform: scale(0.75,0.75)">
+    <canvas id="canvas" width="400px" height="400px" style="background-color: #cccccc;"></canvas>
+</div>
+</body>
+</html>

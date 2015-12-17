@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>09regExpObject.html</title>	
+		<script>
+		/*
+            var str="Is this all there is?";
+            var re=new RegExp("is","gi");
+            document.write(str.match(re)+"<br>");
+            
+            
+            
+            function chkEmail(){
+                var theEmail=document.getElementById("idEmail").value;
+                //var re=/^.+@.+\..{2,3}$/;  //literal
+                //var re=/^\S+@\S+\.\S{2,3}$/;
+                var re=new RegExp("^.+@.+\\..{2,3}$");
+                
+                if(re.test(theEmail))
+                    alert("successful");
+                else
+                    alert("failure");
+   
+            }
+       
+           document.write("\\");
+           */
+          
+       	function pwdCheck(){
+       		var thepwd=document.getElementById("idPwd").value;
+       		var re=/(?=.*[0-9])/;
+       		
+       		if(re.test(thepwd))
+       			alert("correct");
+       		else
+       			alert("incorrect");
+       	}
+
+	
+		</script>	
+	</head>
+
+	<body>
+		Password:<input type="text" id="idPwd">
+		<input type="button" value="pwd check" onclick="pwdCheck();">
+	<!--
+		Email:<input type="text" id="idEmail"/>
+		<br/>		
+		<input type="button" value="check" onclick="chkEmail();"/>
+		-->		
+	</body>
+</html>

@@ -1,0 +1,8 @@
+h2{
+	color:#ff00ff;
+}
+
+a:link{color:#00ffff;}
+a:hover{color:#00ff00;}
+a:visted{color:#ffff00;}
+a:active{color:#FF00FF;}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table{width:300px;
+      border:1px solid green;
+      border-collapse:collapse}
+      table td{
+      	border:1px solid green;
+      	padding:4px;
+      }
+</style>
+</head>
+<body>
+<h1>Selectors Demo</h1>
+<h2>Attribute Selectors</h2>
+<input type="text" value="請輸入"><br>
+<input type="text" value="請輸入"><br>
+<input type="text" value="請輸入"><br>
+<input type="button"  value="送出">
+
+<h2>Basic Filter Selectors</h2>
+<table>
+  <tr>
+    <td>A0</td>
+    <td>B1</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>D3</td>
+    <td>E4</td>
+    <td>F5</td>
+  </tr>
+  <tr>
+    <td>G6</td>
+    <td>H7</td>
+    <td>I8</td>
+  </tr>
+</table>
+<h2>Child Filter Selectors</h2>
+<ul>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+  <li>aaaaa</li>
+</ul>
+<ul>
+	<li>bbbbb</li>
+	<li>bbbbb</li>
+	<li>bbbbb</li>
+	<li>bbbbb</li>
+	<li>bbbbb</li>
+</ul>
+<ul>
+<li>ccccc</li>
+</ul>
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script>
+//attribute selectors
+$('input[type="text"]').css('color','silver');
+
+//basic filter selectors
+//根據索引值找到要控制的對象
+//$('td:eq(2)').css('background-color','yellow'); //C2
+//$('td:lt(3)').css('background-color','yellow'); //A0-C2
+//$('td:gt(5)').css('background-color','orange'); //G6-I8
+
+$('td:even').css('background-color','yellow'); //A0,C2,E4,G6,I8
+$('td:odd').css('background-color','orange'); //B1,D3,F5,H7
+$(':header').css('text-decoration','underline');
+
+//$('li:first').css('background-color','yellow');
+//$('li:last').css('background-color','orange');
+//$('li:eq(2)').css('background-color','yellow');
+
+
+//child filter selector
+//$('li:first-child').css('background-color','yellow');
+//$('li:last-child').css('background-color','orange');
+//$('li:nth-child(2)').css('background-color','yellow');
+//$('li:nth-child(3n)').css('background-color','yellow');
+//$('li:nth-child(3n+1)').css('background-color','yellow');
+$('li:nth-child(even)').css('background-color','yellow');
+$('li:nth-child(odd)').css('background-color','orange');
+$('li:only-child').css('background-color','pink');
+</script>
+</body>
+</html>

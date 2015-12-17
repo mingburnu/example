@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>01dragdrop.html</title>
+        <style>
+          #dragItem{
+             width:100px;height:30px;border:1px solid blue;background-color:beige;margin:10px
+        	}
+          .dragItemStyle{
+             width:100px;height:30px;border:1px solid blue;background-color:beige;margin:10px
+        	}
+        
+          #dropZone,#dropZone1{
+             width:150px;height:100px;border:1px solid blue;float:left
+        	}
+        
+        </style>
+        <script>
+            function dragStartHandler(e) {
+            	e.dataTransfer.setData("text/plain",e.target.id);
+            }
+            
+    
+            function dragoverHandler(e) {
+                e.preventDefault();
+            }
+    
+            function dropHandler(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var elementID=e.dataTransfer.getData("text/plain");
+                //alert(elementID);
+                var elementObj=document.getElementById(elementID);
+                
+                var div1=document.createElement("div");
+                div1.innerHTML=elementObj.innerHTML;
+                
+                div1.setAttribute("class","dragItemStyle");
+                //alert(e.currentTarget.id);
+                e.currentTarget.appendChild(div1);
+            }
+        </script>
+    </head>
+    <body>
+      <div id="dragItem" draggable="true" ondragstart="dragStartHandler(event)">aaaa</div>
+      <div id="dropZone"  ondragover="dragoverHandler(event)" ondrop="dropHandler(event)"></div>
+      <div id="dropZone1" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)"></div>
+    </body>
+
+</html>

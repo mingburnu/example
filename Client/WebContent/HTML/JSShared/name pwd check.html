@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<script>
+		var name="SDFGDS";
+		var psw="@#aa 1";
+        var reg = /[^\u4E00-\u9FA5]/;
+		
+				var temp = name.replace(reg, 'a');				
+
+				var reg2 = new RegExp(/(?=^.{6,}$)(?!.*\s)[0-9a-zA-Z!@#$%*()_+^&]*$/);		
+
+				if(temp.length<2){
+window.alert("name : Not Null or at least two hans words");
+}				
+else{window.alert("name : pass");}				
+
+if(reg2.test(psw)){
+window.alert("password pass");
+}
+else{window.alert("type again");}
+
+		
+		</script>
+	</head>
+<body>
+	
+</form>
+</body>
+</html>

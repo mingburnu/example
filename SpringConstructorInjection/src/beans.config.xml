@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="ConsoleLogStorageProvider" class="com.gis.beans.ConsoleLogProvider" />
+	<bean id="Date" class="java.util.Date" />
+
+	<bean id="LogBean" name="LogBean" class="com.gis.beans.LogBean">
+		<constructor-arg>
+			<ref bean="ConsoleLogStorageProvider" />
+		</constructor-arg>
+	</bean>
+	<bean id="HelloBean" name="HelloBean" class="com.gis.beans.HelloBean">
+		<constructor-arg>
+			<value>Hello World1</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="HelloBean2" name="HelloBean2" class="com.gis.beans.HelloBean">
+		<constructor-arg>
+			<ref bean="Date" />
+		</constructor-arg>
+	</bean>
+	<bean id="HelloBean3" class="com.gis.beans.HelloBean">
+		<constructor-arg>
+			<ref bean="Date" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>Step 1</value>
+		</constructor-arg>
+	</bean>
+	<bean id="AreaBean" class="com.gis.beans.AreaBean">
+		<constructor-arg>
+			<list>
+				<value>Taipei</value>
+				<value>New Taipei City</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="AreaBean2" class="com.gis.beans.AreaBean2">
+		<constructor-arg>
+			<map>
+				<entry key="Taipei" value="110" />
+				<entry key="New Taipei City" value="239" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

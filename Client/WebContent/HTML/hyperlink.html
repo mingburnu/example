@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+	<head>
+		<meta charset="utf-8">
+		<title>Hyperlink</title>
+		
+		<style>
+			li {text-transform:capitalize;}
+			a:link {color:green;text-decoration:none;}
+			a:visited {color:silver}
+			a:hover {text-decoration:underline;color:blue;}
+			a:active {font-size:30px;}
+			#st1 {list-style-type:none;
+				  list-style-image:url("images/arrow1.jpg");
+			}
+			.in {background-color:yellow;
+				list-style-position:inside;
+			}
+			.out {background-color:yellow;
+				list-style-position:outside;
+				
+			}
+			.st2 {list-style-type:none;
+				  list-style-image:url("images/arrow1.jpg");}
+		    .st3 {list-style-type:none;
+				  list-style-image:url("images/arrow2.jpg");}
+			.st4 {list-style-type:none;
+				  list-style-image:url("images/arrow3.gif");}
+		</style>
+		<script>
+			//javascript寫在這裡
+		</script>
+	</head>
+	<body>
+	
+	<a href="http://www.pchome.com.tw">Pchome</a>
+	<a href="first.html">連結</a>
+	<a href="second.html#book1">書籤</a>
+	<hr>
+	<a href="http://www.iiiedu.org.tw"><img src="images/f1.jpg" alt="this is flower!" title="flower"></a>
+	<ul id="st1">
+		<li><a href="http://www.iiiedu.org.tw">home</a></li>
+		<li class="in"><a href="#">blog</a></li>
+		<li><a href="#">photos</a></li>
+		<li class="out"><a href="#">about</a></li>
+		<li><a href="#">contact</a></li>
+	</ul>
+	<hr>
+	<ul class="st2">
+		<li>唐詩</li>
+		<li>宋詞
+			<ul class="st3">
+				<li>李清照
+					<ul class="st4">
+						<li>如夢令</li>
+						<li>菩薩蠻</li>
+						<li>一剪梅</li>
+					</ul><!--作品分類結束標籤-->
+				</li>
+				<li>歐陽修</li>
+			</ul><!--作者分類結束標籤-->
+		</li>
+		<li>元曲</li>
+	</ul>
+	</body>
+</html>

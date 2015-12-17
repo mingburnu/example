@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>02checkMobile.html</title>	
+		<script>
+			function check(){
+				//alert(theMobile);
+				//var theMobile=idMobile.value;
+				
+				//var theMobile=document.myform.txtMobile.value;				
+				//var theMobile=document.forms[0].txtMobile.value;				
+				var theMobile=document.getElementById("idMobile").value;				
+				//var theMobile=document.getElementsByName("txtMobile")[0].value;
+				
+				//alert(document.getElementsByName("hobby").length);
+				//var hobbyObj=document.getElementsByName("hobby");
+				
+				//for(var i=0;i<document.getElementsByName("hobby").length;i++){
+				//	alert(hobbyObj[i].value);
+				//}
+				
+				//alert(document.getElementsByName("hobby")[0].value);
+				//alert(document.getElementsByName("hobby")[1].value);
+				//alert(document.getElementsByName("hobby")[2].value);
+				//alert(document.getElementsByName("hobby")[3].value);
+				
+				//alert(typeof(theMobile));  //string
+				
+				if(isNaN(theMobile))
+					alert("please input number 0-9!!");
+				else
+					alert("Mobile="+theMobile);
+					//document.write("Mobile="+theMobile);
+			}
+		</script>	
+	</head>
+
+	<body>
+		<form name="myform">
+			Mobile Number:<input type="text" id="idMobile" name="txtMobile" size="10" maxlength="10" value="123"><br>
+			興趣:<input type="checkbox" name="hobby" value="movie">電影
+				<input type="checkbox" name="hobby" value="music">音樂
+				<input type="checkbox" name="hobby" value="sport">運動
+				<input type="checkbox" name="hobby" value="reading">閱讀<br>
+			<!--<input type="button" value="check" onclick="check(idMobile.value);" >-->
+			<input type="button" value="check" onclick="check();" >
+		</form>
+	</body>
+</html>

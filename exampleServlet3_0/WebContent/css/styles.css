@@ -1,0 +1,25 @@
+body { 
+  font-family: verdana;
+  font-size: 12pt;
+} 
+
+td { 
+  font-family: verdana;
+  font-size: 20pt;
+} 
+
+legend {
+	font-weight: bold;
+	color: black;
+	background-color: white;
+	border: 1px solid #cccccc;
+	padding: 4px 2px;
+}
+
+fieldset {
+	font-weight: bold;
+	color: black;
+	background-color: #ffffcc;
+	border: 1px solid #cccccc;
+	padding: 4px 2px;
+}

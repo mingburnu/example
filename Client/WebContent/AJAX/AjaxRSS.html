@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RSS Reader</title>
+<style>
+	#myDIV{width:700px;
+		   border:1px solid green;
+		   padding:5px;
+		   box-shadow:5px 5px 5px silver;
+		   margin:0 auto;}
+    a:hover{color:green}
+</style>
+<script type="text/javascript">
+	var xmlHttp;
+	window.onload = function(){
+	    xmlHttp = new XMLHttpRequest();
+		if (xmlHttp != null) {
+			xmlHttp.onreadystatechange = returnData;
+			xmlHttp.open("GET", "LoadRSS.jsp", true);
+			xmlHttp.send();
+	
+		}else{
+			alert ("無法產生XMLHttptRequest物件");
+		}
+
+	}
+	var str = "";
+	function returnData()
+	{
+		var theDIV = document.getElementById("myDIV")
+		if (xmlHttp.readyState == 4)
+		{
+			if(xmlHttp.status == 200){
+				xmlDoc=xmlHttp.responseXML; 
+				//xmlDoc 就是一個 XML DOM
+				
+				var items = xmlDoc.getElementsByTagName("item");
+				
+				for (var i=0;i<items.length;i++){
+					//var txtLink = document.createTextNode(items[i].childNodes[0].firstChild.nodeValue);
+					var txtLink = document.createTextNode(items[i].getElementsByTagName("title")[0].firstChild.nodeValue);
+					var eleLink = document.createElement("a");
+					eleLink.setAttribute("href", items[i].getElementsByTagName("link")[0].firstChild.nodeValue);
+					eleLink.setAttribute("style", "text-decoration:none");
+					eleLink.appendChild(txtLink);
+					
+					
+					var elehr = document.createElement("hr");
+					
+					var txtPubDate = document.createTextNode(items[i].getElementsByTagName("pubDate")[0].firstChild.nodeValue);
+					var elePubDate = document.createElement("div");
+					elePubDate.setAttribute("style","font-size:0.8em;color:silver")
+					elePubDate.appendChild(txtPubDate);
+					
+					var elebr = document.createElement("br");
+						
+					theDIV.appendChild(eleLink);
+					theDIV.appendChild(elehr);
+					theDIV.appendChild(elePubDate);
+					var eleDiv = document.createElement("div");
+					eleDiv.innerHTML = items[i].getElementsByTagName("description")[0].firstChild.nodeValue
+					theDIV.appendChild(eleDiv);
+
+					theDIV.appendChild(elebr);
+				}
+			
+			}
+			else{
+				theDIV.innerHTML = "有錯誤：" + xmlHttp.statusText;
+			}
+			
+		}
+		
+	}
+	
+	
+</script>
+</head>
+<body>
+<div id="myDIV"></div>
+</body>
+</html>

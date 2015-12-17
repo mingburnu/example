@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01globalObject.html</title>	
+		<script>
+			var n=3;
+			var b=6,c=7;
+			
+			document.write("eval('1>2')="+eval('1>2')+"<br>");
+			document.write("eval('a3=b*c')==>"+eval("a"+n+"=b*c")+"<br>");
+			
+			document.write("isNaN('123')="+isNaN('123')+"<br>");
+			document.write("isNaN('a123')="+isNaN('a123')+"<br>");
+			document.write("escape('123&chen@iii.org.tw')="+escape('123&chen@iii.org.tw')+"<br>");
+			document.write("encodeURI('123&chen@iii.org.tw')="+encodeURI('123&chen@iii.org.tw')+"<br>");
+			document.write("escape('中文')="+escape('中文')+"<br>");
+			document.write("unescape('%u4E2D%u6587')="+unescape('%u4E2D%u6587')+"<br>");
+			document.write("encodeURI('中文')="+encodeURI('中文')+"<br>");
+			document.write("decodeURI('%E4%B8%AD%E6%96%87')="+decodeURI('%E4%B8%AD%E6%96%87')+"<br>");
+			document.write("escape('中')="+escape('中')+"<br>");
+			document.write("encodeURI('中')="+encodeURI('中')+"<br>");
+			
+		</script>	
+	</head>
+
+	<body>
+		
+	</body>
+</html>

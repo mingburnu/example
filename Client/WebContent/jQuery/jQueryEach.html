@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="text" title="name"><br>
+<input type="text" title="email"><br>
+<input type="text" title="phone"><br>
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script>
+  //$(':text').val("請輸入");
+  $(':text').each(function(){
+	 var title = $(this).attr("title");
+	 //console.log(title);
+	 $(this).val(title);
+  });
+  /*
+  var names = ["Tom","Mary","Jack"];
+  $.each(names,function(){
+	  console.log(this);
+  })
+  
+  var emp = {"name":"Tom","workYears":3,"salary":42000};
+  $.each(emp,function(propName,propValue){
+	  console.log(propName);
+	  console.log(propValue);
+  })
+  */
+  
+  var emps = [{"name":"Tom","workYears":3,"salary":42000},
+              {"name":"Jack","workYears":5,"salary":45000},
+              {"name":"Mary","workYears":7,"salary":47000}];
+  $.each(emps,function(){
+	  //console.log(this.name);
+	  //console.log(this.workYears);
+	  //console.log(this.salary);
+	  $.each(this,function(n,v){
+		  console.log(n + ":" + v);
+	  })
+  })
+</script>
+</body>
+</html>

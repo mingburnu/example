@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+  //Array
+  //var names =  new Array("Tom","Jack","Mary");
+  //var names = ["Tom","Mary","Jack"];
+  //alert(names[0]);
+  //for(var i=0,max=names.length;i<max;i++){
+	//  console.log(names[i]);
+  //}
+  
+  //Object
+  //var emp = new Object();
+  //emp.name = "Tom";
+  //emp.salary = 32000;
+  
+  //var emp = {"name":"Tom","workYears":3,"salary":42000};  
+  
+  //console.log(emp.name);
+  //console.log(emp.workYears);
+  //console.log(emp.salary);
+  
+  //JSON
+  var emps = [{"name":"Tom","workYears":3,"salary":42000},
+              {"name":"Jack","workYears":5,"salary":45000},
+              {"name":"Mary","workYears":7,"salary":47000}];
+  
+  
+  //emps -> array
+  //emps[0] -> object
+  //alert(emps[1].name);
+  /*
+  for(var i=0,max=emps.length;i<max;i++){
+	  console.log(emps[i].name);
+	  console.log(emps[i].workYears);
+	  console.log(emps[i].salary);
+  }
+  */
+  var data = {employees:[{"name":"Tom","workYears":3,"salary":42000,"contact":{"cell":"0911222333","home":"02-12345677"}},
+                         {"name":"Jack","workYears":5,"salary":45000,"contact":{"cell":"0911222333","home":"02-12345677"}},
+                         {"name":"Mary","workYears":7,"salary":47000,"contact":{"cell":"0911222333","home":"02-12345677"}}]};
+  //data -> object
+  //data.employees -> array
+  //data.employees[0] -> object
+    for(var i=0,max=data.employees.length;i<max;i++){
+	  console.log(data.employees[i].name);
+	  console.log(data.employees[i].workYears);
+	  console.log(data.employees[i].salary);
+	  console.log(data.employees[i].contact.cell);
+	  console.log(data.employees[i].contact.home);
+  }
+  
+</script>
+</head>
+<body>
+
+</body>
+</html>

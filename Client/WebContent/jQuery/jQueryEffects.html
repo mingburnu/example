@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#div1{
+	width:450px;
+}
+
+#alligator{
+	position:absolute;	
+	left:900px;
+	top:500px;
+}
+</style>
+</head>
+<body>
+<input type="button" value="顯示隱藏" id="buttonShowHide">
+<input type="button" value="滑動效果" id="buttonSlide">
+<input type="button" value="淡入淡出" id="buttonFade">
+<div id="div1">
+ <img src="Images/cars2.jpg" alt="cars 2" />
+</div>
+<img src="Images/alligator.gif" id="alligator">
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script src="Scripts/jquery-ui-1.10.4.effects.min.js"></script>
+
+ <script>
+ $('#div1>img').fadeTo(500,0.3)
+               .hover(function(){
+            	   $(this).fadeTo(1000,1);
+               },function(){
+            	   $(this).fadeTo(1000,0.3);
+               });
+ $('#buttonShowHide').click(function(){
+	/*
+	$('#div1').hide(1500,function(){
+		 $('#div1').show(1500);
+	 });
+	*/
+	$('#div1').toggle('shake',1500);
+ });
+ $('#buttonSlide').click(function(){
+	/* $('#div1').slideUp(1500,function(){
+		 $('#div1').slideDown(1500);
+	 });*/
+	 $('#div1').slideToggle(1500);
+ });
+ $('#buttonFade').click(function(){
+	/* $('#div1').fadeOut(1500,function(){
+		 $('#div1').fadeIn(1500);
+	 });*/
+	 $('#div1').fadeToggle(1500);
+ });
+ 
+ $('#alligator').click(function(){
+	 $(this).animate({"left":0,
+		              "top":0,
+		              "width":50,
+		              "opacity":0.5},5000,'easeOutElastic',function(){
+		            	  $(this).remove();
+		              });
+ });
+ </script>
+</body>
+</html>

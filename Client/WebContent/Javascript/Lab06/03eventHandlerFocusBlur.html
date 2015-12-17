@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>02eventHandlerFocusBlur.html</title>	
+		<script>
+			window.onload=function(){
+                document.getElementById("idText").onblur=fblur;
+                document.getElementById("idText").onfocus=ffocus;
+                document.getElementById("idText").onchange=fchange;
+            }
+            function fblur(){
+                document.bgColor="green";
+            }
+            function ffocus(){
+                document.bgColor="red";
+            }
+            function fchange(){
+                document.fgColor="yellow";
+                document.getElementById("idText").style.color="red";
+                document.getElementById("idsp").innerHTML="not blank";
+            }
+		</script>	
+	</head>
+
+	<body>
+		<input type="text" id="idText" value="click here change bgColor"/>
+		<h1 >this is h1</h1>
+		<span id="idsp">span</span>
+	</body>
+</html>

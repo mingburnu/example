@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ table {width:300px;border:1px solid black;border-collapse:collapse} 
+ td,th{width:100px;border:1px solid black;padding:3px}
+ .del{
+ text-decoration:none;
+ } 
+ </style>
+
+</head>
+<body>
+<input type="button" value="add" id="buttonAdd">
+<input type="button" value="取消新增" id="buttonunBind">
+<table id="table1">
+  <thead>
+     <tr>
+       <th>Col1</th>
+       <th>Col2</th>
+       <th>Col3</th>
+       <th>刪除</th>
+     </tr> 
+  </thead>
+  <tbody>
+	<tr>
+		<td>A0</td>
+		<td>B1</td>
+		<td>C2</td>
+		<td><a href="#" class="del">刪除</a></td>
+	</tr>
+	<tr>
+		<td>D3</td>
+		<td>E4</td>
+		<td>F5</td>
+		<td><a href="#" class="del">刪除</a></td>
+	</tr>
+	<tr>
+		<td>G6</td>
+		<td>H7</td>
+		<td>I8</td>
+		<td><a href="#" class="del">刪除</a></td>
+	</tr>
+
+
+  </tbody>
+</table>
+
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+ <script>
+ //$('.del').click(del);
+ //$('.del').bind('click',del);
+ //$('.del').one('click',del);
+ //$('.del').on('click',del);
+ $('#table1').on('click','.del',del);
+ 
+ function del(){
+	$(this).parents("tr").remove();
+	 
+ }
+ 
+ $('#buttonAdd').bind('click',function(){
+	 $('#table1>tbody').append("<tr><td>X</td><td>Y</td><td>Z</td><td><a href='#' class='del'>刪除</a></td></tr>");
+ })
+ 
+ $('#buttonunBind').bind('click',function(){
+	 $('#buttonAdd').unbind('click');
+ })
+ </script>
+</body>
+</html>

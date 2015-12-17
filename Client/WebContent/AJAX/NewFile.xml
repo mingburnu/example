@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+	<employee id="a2&quot;34">
+	  <name>Jack &amp; Mary</name>
+	  <salary>26000</salary>
+	  <salary>3000</salary>
+	</employee>
+	<employee id='a1234'>
+	  <name>Mary</name>
+	  <salary>29000</salary>
+	</employee>
+</employees>

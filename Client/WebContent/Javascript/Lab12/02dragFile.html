@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>02dragFile.html</title>
+        <script>
+            function dragoverHandler(e) {
+            	e.preventDefault();
+            }
+    
+            function dropHandler(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var theFiles=e.dataTransfer.files;
+                for(var i=0;i<theFiles.length;i++){
+                	theFile=theFiles[i];
+                	
+                	
+                	var reader=new FileReader();
+                	reader.readAsText(theFile,"UTF-8");
+                	
+                	reader.onload=function(e){
+                		var fileContent=e.target.result;
+                		//document.getElementById("show").innerHTML=fileContent;
+                		document.getElementById("show").insertAdjacentHTML("BeforeEnd", fileContent);
+                	}
+                	
+                }
+            }
+         
+        </script>
+        
+    </head>
+        
+    <body>
+      <textarea cols="60" rows="20" id="show" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)"></textarea>
+    </body>
+
+</html>
+

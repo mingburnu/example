@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Template</title>
+</head>
+<body>
+<input type="button" value="Load" id="buttonLoad">
+
+<script src="Scripts/myXMLHttp.js"></script>
+<script>
+ 
+ var btnLoad = document.getElementById("buttonLoad");
+ btnLoad.onclick =load;
+ function load(){
+	
+	 var xmlHttp = initXMLHttpRequest();
+	 //var xmlHttp = new XMLHttpRequest();
+	 if(xmlHttp != null){
+		 //開始Ajax程式
+		 alert("您的瀏覽器支援Ajax功能!!");
+	 }else{
+		 alert("您的瀏覽器不支援Ajax功能!!");
+	 }
+	 
+ }
+</script>
+</body>
+</html>

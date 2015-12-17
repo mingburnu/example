@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--Generated 2013/4/2 ?W?? 01:50:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+<class name="com.gis.COMPOSITE_KEY" table="composite_key">
+<composite-id >
+<key-property name="NAME"
+column="NAME"/>
+<key-property name="PHONE"
+column="PHONE"/>
+</composite-id>
+<property name="ADDRESS" type="java.lang.String" access="property">
+<column name="ADDRESS" />
+</property>
+</class>
+</hibernate-mapping>

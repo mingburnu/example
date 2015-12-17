@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>
+	<title>02magic_hard.html</title>
+	<script>
+			function showRabbit(){				
+
+				var hatImage=document.getElementById("topHat");
+
+				var newImage=document.createElement("img");
+				newImage.setAttribute("src","DOMImage/rabbit-hat.gif");
+				//newImage.setAttribute("id","topHat");
+				//alert(hatImage);
+				var imgParent=hatImage.parentNode;
+				//alert(imgParent.tagName);  //p
+
+				imgParent.replaceChild(newImage,hatImage);
+
+
+			}
+	</script>
+	</head>
+	<body>
+		<h1 align="center">Welcome to the DOM Magic Shop!</h1>
+		<form name="magic-hat" action="">
+			<p align="center">
+				<img alt="" src="DOMImage/topHat.gif" id="topHat"/>
+				<br/><br/>
+				<input type="button" id="hocusPocus" value="Hocus Pocus!" onclick="showRabbit();"/>
+
+			</p>
+		</form>
+		<div id="iddiv">div</div>
+	</body>
+</html>

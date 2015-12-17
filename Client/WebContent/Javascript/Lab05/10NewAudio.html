@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />	
+		<title>tempator</title>
+		<script>
+		var play;
+		var audio;
+		var range1;
+		window.onload = function(){
+		  audio =  new Audio("song.wav");
+		  
+		  play = document.getElementById("buttonPlay");
+		  play.onclick = go;
+		  
+		  range1 = document.getElementById("buttonRange");
+		  range1.onchange = chg;
+		  
+		}
+
+		function go(){
+		  if(play.value == "Play"){
+		    audio.play();
+		    play.value = "Pause";
+		  }
+		  else{
+		    audio.pause();
+		    play.value = "Play";
+		  }
+		}
+		
+		function chg(){
+		  audio.volume = parseFloat(range1.value / 10);
+		}
+		</script>
+		</head>
+
+<body>
+ <input type="button" value="Play" id="buttonPlay">
+ <input type="range" min="1" max="10" value="5" id="buttonRange">
+</body>
+
+</html>

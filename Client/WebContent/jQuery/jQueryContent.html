@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="text" value="guest">
+<div id="div1">
+  <h1>write less, do more</h1>
+</div>
+<hr>
+<select id="select1">
+   <option value="a">Item1</option>
+   <option value="b">Item2</option>
+   <option value="c">Item3</option>
+   <option value="d">Item4</option>
+</select>
+<input type="button" value="add" id="buttonAdd">
+<input type="button" value="delete" id="buttonDelete">
+<div id="div2"></div>
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script>
+   //讀取
+  //console.log($('#div1').text());
+  //console.log($('#div1').html());
+  //console.log($(':text').val());
+  //設定
+  //$('#div1').text("<h1>Hello World!!</h1>");
+  //$('#div1').html("<h1>Hello World!!</h1>");
+  //$(':text').val("Tom");
+  
+  var items = {"Item5":"e","Item6":"f","Item7":"g"};
+  
+  $('#buttonAdd').click(function(){
+	 // alert("a");
+	  $.each(items,function(n,v){
+		  //console.log(n);
+		  //console.log(v);
+		  //$('#select1').append("<option value='" + v + "'>" + n + "</option>");
+		  var opt = $('<option></option>').val(v).text(n);
+		  $('#select1').append(opt);
+	  })
+  });
+  $('#buttonDelete').click(function(){
+	  //alert("d");
+	   $('#select1>:selected').remove();
+  });
+  
+  $('#select1').change(function(){
+	  var v = $(this).val(); //$('#select1>:selected').val();
+	  var t = $('#select1>:selected').text();
+	  var i = $('#select1>:selected').index();
+	  $('#div2').html("<h2>" + i + "," + v + "," + t + "</h2>");
+  });
+</script>
+</body>
+</html>

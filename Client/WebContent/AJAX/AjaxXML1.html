@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Template</title>
+<style>
+ .s1 {width:600px;
+      border:1px green solid;
+      border-collapse:collapse}
+ .s1 td, .s1 th{
+      border:1px green solid;
+      padding:4px;}
+</style>
+</head>
+<body>
+<input type="button" value="Load" id="buttonLoad">
+<div id="div1"></div>
+<script>
+ 
+ var btnLoad = document.getElementById("buttonLoad");
+ btnLoad.addEventListener("click", load, false);
+ var xhr;
+ function load(){
+	
+	 xhr = new XMLHttpRequest();
+	 xhr.addEventListener("readystatechange",callback,false);
+	 var url = "Books.xml";
+	 xhr.open("get",url,true);
+	 xhr.send();
+	 
+	 
+	 
+	 
+ }
+ 
+ function callback(){
+	 if(xhr.readyState == 4){
+		 if(xhr.status == 200){
+			//server端回傳的是XML資料,就要用responseXML來接收
+	        var data = xhr.responseXML;
+			
+			//顯示資料
+			var books = data.getElementsByTagName("book");
+			//console.log(books.length);
+			var eleTable = document.createElement("table");
+			eleTable.setAttribute("class","s1");
+			eleTable.innerHTML = "<tr><th>ISBN</th><th>Title</th><th>Publisher</th><th>Price</th><th>Author</th></tr>";
+			for(var i=0,max=books.length;i<max;i++){
+				var isbn = books[i].getAttribute("isbn");
+				//console.log(books[i].childNodes[1].firstChild.nodeValue);
+				//console.log(books[i].childNodes[3].firstChild.nodeValue);
+				//console.log(books[i].childNodes[5].firstChild.nodeValue);
+				//console.log(books[i].childNodes[7].firstChild.nodeValue);
+				var title = books[i].getElementsByTagName("title")[0].firstChild.nodeValue;
+				var publisher = books[i].getElementsByTagName("publisher")[0].firstChild.nodeValue;
+				var price = books[i].getElementsByTagName("price")[0].firstChild.nodeValue;
+				var author = books[i].getElementsByTagName("author")[0].firstChild.nodeValue;
+				
+				//<tr><td>isbn</td><td>title</td></tr>
+				
+				//<td>isbn</td>
+				//建立文字節點
+				var txtIsbn = document.createTextNode(isbn); //isbn
+				//建立元素節點
+				var cellIsbn = document.createElement("td");  //<td></td>
+				//將文字節點加到元素結點之下
+				cellIsbn.appendChild(txtIsbn); //<td>isbn</td>
+				
+				//<td>title</td>
+				//建立文字節點
+				var txtTitle = document.createTextNode(title); //title
+				//建立元素節點
+				var cellTitle = document.createElement("td");  //<td></td>
+				//將文字節點加到元素結點之下
+				cellTitle.appendChild(txtTitle); //<td>title</td>
+				
+				//<td>publisher</td>
+				//建立文字節點
+				var txtPublisher = document.createTextNode(publisher); 
+				//建立元素節點
+				var cellPublisher = document.createElement("td");  
+				//將文字節點加到元素結點之下
+				cellPublisher.appendChild(txtPublisher); 
+				
+				//<td>price</td>
+				//建立文字節點
+				var txtPrice = document.createTextNode(price); 
+				//建立元素節點
+				var cellPrice = document.createElement("td");  
+				//將文字節點加到元素結點之下
+				cellPrice.appendChild(txtPrice); 
+				
+				//<td>author</td>
+				//建立文字節點
+				var txtAuthor = document.createTextNode(author); 
+				//建立元素節點
+				var cellAuthor = document.createElement("td");  
+				//將文字節點加到元素結點之下
+				cellAuthor.appendChild(txtAuthor); 
+				
+				var row = document.createElement("tr");
+				
+				row.appendChild(cellIsbn); //<tr><td>isbn</td></tr>
+				row.appendChild(cellTitle);
+				row.appendChild(cellPublisher);
+				row.appendChild(cellPrice);
+				row.appendChild(cellAuthor);
+				
+				eleTable.appendChild(row);
+			
+			}
+			
+			var myDiv = document.getElementById("div1");
+			if (myDiv.hasChildNodes()){
+			    myDiv.removeChild(myDiv.firstChild);
+			}
+			myDiv.appendChild(eleTable);
+			
+			
+		 }
+	 }
+	 
+ }
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<script>
+			
+        //var s = document.getElementById("myText").value;
+        var s="µLabc";
+        var sp=s.split("");
+        document.write(s.charAt(0));  
+        document.write(sp.length);  
+        
+     
+        for(var i = 0; i < s.length; i++) {
+           if(s.charCodeAt(i) > 0x4E00 && s.charCodeAt(i) < 0x9FA5) {     
+          
+             var c =s.charAt(i);  
+              document.write(c);                
+            }
+       }
+   
+		</script>
+	</head>
+<body>
+	
+</body>
+</html>

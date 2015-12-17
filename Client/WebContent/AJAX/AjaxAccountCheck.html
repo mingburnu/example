@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+fieldset,#registerDiv{width:400px;}
+#registerDiv{
+	margin:0 auto;
+}
+</style>
+<script type="text/javascript">
+	window.onload = init;
+	 var xmlHttp;
+	function init(){		
+		window.document.registerForm.UserName.onblur = function(){
+			var theName = window.document.registerForm.UserName.value;
+			//ajax開始
+			 xmlHttp = new XMLHttpRequest();
+			 xmlHttp.onreadystatechange = callback;
+			 var strUrl = "AccountCheck.jsp?name=" + theName;
+			 xmlHttp.open("GET",strUrl,true);
+			 xmlHttp.send();
+
+		};
+	}
+	
+	 function callback(){
+		 if(xmlHttp.readyState == 4){
+			 if(xmlHttp.status == 200){
+				 //步驟三接收資料
+				  var strData = xmlHttp.responseText;
+				  //alert(strData);
+				  //將結果顯示在網頁上
+				  var msg = document.getElementById("span1");
+				  msg.innerHTML = strData;
+			 }
+		 }
+	  }
+</script>
+</head>
+<body>
+ <div id="registerDiv">
+ <fieldset style="width:400px;">
+ <legend>會員註冊</legend>
+ <form name="registerForm" action="First.jsp" method="POST">
+ 帳號 : <input type="text" name="UserName" id="UserName"><span id="span1"></span><br>
+密碼 : <input type="password" name="password" id="password"><br>
+ 電子郵件 : <input type="text" name="email" id="email"><br>
+ <input type="submit" value="註冊">
+ 
+ </form>
+ </fieldset>
+ </div>
+</body>
+</html>

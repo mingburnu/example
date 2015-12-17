@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+    <head>             
+	<title>01magic.html</title>
+	<script>
+	       function showRabbit(){
+                var hatImage=document.getElementById("topHat");
+                hatImage.setAttribute("src","DOMImage/rabbit-hat.gif");
+                
+                var button=document.getElementById("hocusPocus");
+                button.setAttribute("value","Get back in that hat!");
+                
+                button.onclick=hideRabbit;
+            }
+          
+          	function hideRabbit(){
+                var hatImage=document.getElementById("topHat");
+                hatImage.setAttribute("src","DOMImage/topHat.gif");
+                
+                var button=document.getElementById("hocusPocus");
+                button.setAttribute("value","Hocus Pocus!");
+                
+                button.onclick=showRabbit;
+            }
+             
+			
+	</script>
+	</head>
+	<body>
+		<h1 align="center">Welcome to the DOM Magic Shop!</h1>
+		<form name="magic-hat" action="">
+			<p align="center">
+				<img alt="" src="DOMImage/topHat.gif" id="topHat"/>
+				<br/><br/>
+				<input type="button" id="hocusPocus" value="Hocus Pocus!" onclick="showRabbit();"/>
+				
+			</p>
+		</form>
+	</body>
+</html>

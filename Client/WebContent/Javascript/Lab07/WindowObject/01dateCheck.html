@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01open.html</title>	
+		<script type="text/javascript">
+			window.onload=function(){
+				document.getElementById("idCheck").onclick=checkDate;
+			}
+			
+			function checkDate(){
+				var theDate=document.getElementById("idDate").value;
+				var d=new Date(theDate);
+				document.write(d);
+				var dd=new Date(2014,02,0);  //當月最後一天
+				alert(dd)
+			}
+		</script>	
+	</head>
+
+	<body>
+		this is open html
+        <a href="01a.html">01a.html</a><br>
+        Date:<input type="text" id="idDate"><br>
+        <input type="button" value="checkDate" id="idCheck">
+	</body>
+</html>

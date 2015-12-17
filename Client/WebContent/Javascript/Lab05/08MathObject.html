@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>08MathObject.html</title>	
+		<script>
+			document.write("Math.ceil(2.1)="+Math.ceil(2.1)+"<br>");  //3
+            document.write("Math.floor(2.9)="+Math.floor(2.9)+"<br>");  //2
+            for(var i=1;i<=10;i++)
+                document.write("Math.random()="+Math.random()+"<br>"); 
+            document.write("<hr>");
+            for(var i=1;i<=10;i++)
+                document.write("Math.random()="+Math.floor(Math.random()*6+1)+"<br>"); 
+            document.write("<hr>");
+            
+            var no=Math.floor(Math.random()*5+1);
+            document.write(no);
+            document.write("<audio src='music/song"+no+".mp3' autoplay='autoplay' controls='controls'>audio</audio>");
+		</script>	
+	</head>
+
+	<body>
+		<!--
+        <audio src="music/song1.mp3" autoplay="autoplay" controls="controls">audio</audio>
+       -->
+        
+	</body>
+</html>

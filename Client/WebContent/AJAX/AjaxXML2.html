@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Template</title>
+</head>
+<body>
+<input type="button" value="Load" id="buttonLoad">
+<div id="div1"></div>
+<script>
+ 
+ var btnLoad = document.getElementById("buttonLoad");
+ btnLoad.addEventListener("click", load, false);
+ var xhr;
+ function load(){
+	
+	 xhr = new XMLHttpRequest();
+	 xhr.addEventListener("readystatechange",callback,false);
+	 var url = "XMLServlet?term=c";
+	 xhr.open("get",url,true);
+	 xhr.send();
+	 
+	 
+	 
+	 
+ }
+ 
+ function callback(){
+	 if(xhr.readyState == 4){
+		 if(xhr.status == 200){
+			//server端回傳的是XML資料,就要用responseXML來接收
+	        var data = xhr.responseXML;
+			
+			//顯示資料
+			var customers = data.getElementsByTagName("CustomerID");
+			//alert(titles.length);
+			var eleUl = document.createElement("ul");
+			for(var i=0,max=customers.length;i<max;i++){
+				//console.log(titles[i].firstChild.nodeValue);
+				var customer = customers[i].firstChild.nodeValue;
+				
+				//<ul><li>XML 超級手冊 (The XML Handbook, 3/e)</li></ul>
+				
+				
+				//建立文字節點
+				var txtTitle = document.createTextNode(customer); //書名
+				//建立元素節點
+				var eleLi = document.createElement("li");  //<li></li>
+				//將文字節點加到元素結點之下
+				eleLi.appendChild(txtTitle); //<li>書名</li>
+				
+				eleUl.appendChild(eleLi); //<ul><li>書名</li></ul>
+				
+				
+				
+			}
+			
+			var myDiv = document.getElementById("div1");
+			myDiv.appendChild(eleUl);
+			
+		 }
+	 }
+	 
+ }
+</script>
+</body>
+</html>

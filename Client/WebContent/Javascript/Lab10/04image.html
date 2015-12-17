@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>04image.html</title>
+        <script>
+          window.onload=function(){
+          		var canvas = document.getElementById("myCanvas");
+                var context = canvas.getContext("2d");
+                
+                var imgObj=new Image();
+                imgObj.src="cars.jpg";
+                
+                imgObj.onload=function(){
+                	//context.drawImage(imgObj,0,0);
+                	//context.drawImage(imgObj,0,0,217,127);
+                	context.drawImage(imgObj,187,44,100,30,100,100,150,60);
+                }
+          }
+        </script>
+    </head>
+    <body>
+      <canvas id="myCanvas" width="500px" height="400px"></canvas>
+    </body>
+
+</html>
+

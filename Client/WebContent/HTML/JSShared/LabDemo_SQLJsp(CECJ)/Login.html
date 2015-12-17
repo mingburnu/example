@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>		
+    <title>Register</title>
+    <!--
+    <link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+    -->
+ <!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!--
+<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/>
+--> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+<!--
+<link rel="sttylesheet" type="text/css" href="css/Register.css"/> 
+-->
+<style type="text/css">
+	.spanwidth{width:150px;color:red}
+	#spanLastName,#spanAccount{left:2em;position:relative;display:inline-block;zoom:1;}
+	#spanFirstName{left:4em;position:relative;display:inline-block;zoom:1;}
+	fieldset{width:600px;}
+</style>   
+    <script type="text/javascript" src="ajaxXMLHttp.js"></script>
+    <script type="text/javascript">
+        var xmlHttp;
+        window.onload = function () {                   
+            document.getElementById("btnLoginAccount").onclick =  checkAccout ;                      
+        }  //window.onload  
+		
+		var theAccount;
+		function checkAccout(){
+			var theEmail = document.getElementById("idAccount").value; 
+            var thePassword = document.getElementById("idPassword").value;
+            if (theEmail.indexOf("@")==-1)
+                theEmail+= "@iii.org.tw"; 
+            //alert(theEmail);
+            if (thePassword=="") 
+            	document.getElementById("spanPassword").innerHTML = "請輸入密碼";
+            else if (thePassword.length<6 || thePassword.length>=10){
+            	document.getElementById("spanPassword").innerHTML = "請輸入6-8個字密碼";            	
+            	document.getElementById("idPassword").focus();
+            }
+            else{            
+            		theAccout="Email="+theEmail+"&Password=" + thePassword;
+            		loginAccount();
+            	}
+		}
+        function loginAccount() {
+            //alert('loginAccount');          
+
+            xmlHttp = initXMLHttpRequest();
+
+            if (xmlHttp != null) {          
+                            
+                xmlHttp.open("POST", "GetLogin.jsp", true);
+                xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlHttp.send(theAccout);               
+                xmlHttp.onreadystatechange = returnLoginAccount;
+            }
+            else {
+                alert("object not create");
+            }
+        }  //checkAccount
+        
+        function returnLoginAccount() {
+            //alert("returnData");
+            if (xmlHttp.readyState == 4) {
+                //alert(xmlHttp.readyState);
+                if (xmlHttp.status == 200) {  
+                	//alert(xmlHttp.status);                
+                    var data = eval('(' + xmlHttp.responseText + ')'); 
+                    //alert(data);                                   
+                    if (data)
+                        document.getElementById("spanAccount").innerHTML = "已登入";                                                      
+                    else                  
+                        document.getElementById("spanAccount").innerHTML ="此帳號尚未建立"                                        
+                    } //if
+                else {
+                    document.getElementById("spanAccount").innerHTML = "error:" + xmlHttp.statusText;
+                    }  //if status
+            }  //if readystatus
+        }
+
+	
+    </script>
+</head>
+<body>
+   <div class="bg">
+    <!--start container-->
+    <div id="container">
+    <!--start header-->
+    <header>
+      <!--start logo-->
+      <a href="#" id="logo"><img src="images/iiiedulogo.png" width="400" height="30" alt="logo"/></a>    
+      <!--end logo-->
+      <!--start menu-->
+  	   <nav>
+         <ul>
+         <li><a href="index.html" class="current">Home</a></li>
+         <li><a href="Register.html">Register</a></li>
+     	   <li><a href="shopping_cart.html">shopping_cart</a></li>
+     	   <li><a href="HomeWorkajaxJSONmap.html">map</a></li>
+           <li><a href="Login.html">Login</a></li>
+         </ul>
+      </nav>
+  	   <!--end menu-->
+      <!--end header-->
+	</header>
+   <!--start intro-->
+   <section id="intro">
+      <hgroup>
+      <h1 style="font-family: 標楷體">"台灣資訊化的推手"<span>- 資訊工業策進會</span></h1>
+      <h2 style="font-family: 標楷體">邁向資訊化社會是全球必然的趨勢與潮流，而發展的關鍵就在資訊教育的成果。資策會早在這種風潮萌芽之初，即由享有台灣『科技教父』之稱的前行政院李政務委員國鼎先生大力推動，於民國68年7月成立財團法人資訊工業策進會。</h2>
+      </hgroup>
+   </section>
+   <!--end intro-->
+   <!--start holder-->
+   <div class="holder_content">
+         <form action="">
+        <fieldset >
+            <legend>登入帳號</legend>            
+            <div>
+                <label >帳號</label> 
+                <input type="text" name="txtAccount" id="idAccount" title="帳號"  />
+                <span class="spanwidth" id="spanAccount" ></span>
+                <br>
+           		密碼:<input type="password" id="idPassword"min="6" max="10">
+           		<span class="spanwidth" id="spanPassword" ></span><br>
+           		<input type="button" value="登入" id="btnLoginAccount" onclick="loginAccount" /> 
+           </div>
+           </fieldset>                  
+        </form>
+	</div>
+	<!--end holder-->
+   <!--start holder-->
+   <div class="holder_content">
+      <section class="group4">
+         <h3>Latest article</h3>
+         <article>
+         <h4>22.08.2011  - Design to express </h4>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst.</p>
+         </article> 
+       </section>
+   </div>
+   <!--end holder-->
+   </div>
+   <!--end container-->
+   <!--start footer-->
+   <footer>
+      <div class="container">  
+         <div id="FooterTwo"> © 2011 Minimalism </div>
+         <div id="FooterTree"> Valid html5, design and code by <a href="http://www.marijazaric.com">marija zaric - creative simplicity</a> </div> 
+      </div>
+   </footer>
+   <!--end footer-->
+   </div>
+   <!--end bg-->
+   <!-- Free template distributed by http://freehtml5templates.com -->
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--Generated 2013/3/31 ?U?? 09:13:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>	
+	<class name="com.gis.DEPARTMENT" table="departments" optimistic-lock="version">
+		<id name="ID" type="java.lang.String" access="property">
+			<column name="ID" />
+			<generator class="assigned" />
+		</id>
+		<version name="VERSION" column="VERSION" access="field"/>
+		<property name="NAME" type="java.lang.String" access="property">
+			<column name="NAME" />
+		</property>
+	</class>
+</hibernate-mapping>

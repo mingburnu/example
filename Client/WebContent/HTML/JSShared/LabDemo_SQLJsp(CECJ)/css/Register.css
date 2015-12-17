@@ -1,0 +1,4 @@
+.spanwidth{width:150px;color:red}
+#spanLastName,#spanAccount{left:2em;position:relative;display:inline-block;zoom:1;}
+#spanFirstName{left:4em;position:relative;display:inline-block;zoom:1;}
+fieldset{width:600px;}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#div1{
+	width:450px;
+}
+
+</style>
+</head>
+<body>
+<input type="button" value="get" id="buttonGet">
+<input type="button" value="post" id="buttonPost">
+<input type="button" value="json" id="buttonJson">
+<input type="button" value="ajax" id="buttonAjax">
+<img src="Images/ajax-loader.gif" id="img1">
+<div id="div1">
+</div>
+
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+ <script>
+ $('#img1').hide();
+ 
+ $('#buttonGet').click(function(){
+	$.get('Parameter.jsp',{"name":"Jack","age":23},function(data){
+		$('#div1').html("<h2>" + data + "</h2>");
+	})
+ });
+ $('#buttonPost').click(function(){
+	 $.post('Parameter.jsp',{"name":"Mary","age":25},function(data){
+		$('#div1').html("<h2>" + data + "</h2>");
+	 })
+ });
+ $('#buttonJson').click(function(){
+	$.getJSON('travel.json',{},function(data){
+		$.each(data,function(){
+			$('#div1').append("<h2>" + this.title + "</h2>");
+
+		})
+	})
+ });
+ $('#buttonAjax').click(function(){
+	 var strUrl = "travel.json"; //"Parameter.jsp";
+	$.ajax({
+		url:strUrl,
+		type:"get",  //"get" or "post"
+		data:{"name":"Steve","age":27},
+		dataType:"json",  //"text" or "json"  or "xml"
+		success:function(data){
+			//$('#div1').html("<h2>" + data + "</h2>");
+			$.each(data,function(){
+			   $('#div1').append("<h2>" + this.title + "</h2>");
+		    })
+		}
+	})
+ });
+ 
+ 
+ $(document).ajaxStart(function(){
+	 $('#img1').show();
+ }).ajaxStop(function(){
+	 $('#img1').hide();
+ });
+
+ </script>
+</body>
+</html>

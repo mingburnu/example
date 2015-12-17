@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01eventHandler.html</title>	
+		<script>
+		// window.onload=init;	
+		// function init(){
+			// document.getElementById("theH2").onclick=clickf;
+		// }
+		
+		window.onload=function(){
+			document.getElementById("theH2").onclick=clickf;
+		}
+		
+		function chcolor(){
+			
+			document.getElementById("h").style.color="blue";
+		}
+		function clickf(){
+			alert("click");
+		}
+		function mouseDown(){
+			alert("mouse down");
+		}
+		
+		</script>	
+	</head>
+	
+	<body>
+<!--
+	<body onload="init();">
+	-->
+		<!-- method 1 -->
+		<h1 id="h" onmouseover="this.style.color='red';" onmouseout="chcolor();">this is h1</h1>
+		<!-- method 2 -->
+		<h2 id="theH2">this is h2</h2>
+		<script>
+			//document.getElementById("theH2").onclick=clickf;
+			
+		</script>
+		
+		<!-- method 3 -->
+		<input type="button" id="idbutton" value="mousedown">
+		<script>
+			//document.getElementById("idbutton").addEventListener("mousedown",mouseDown,true);
+			//document.getElementById("idbutton").attachEvent("onmousedown",mouseDown);
+		</script>
+	</body>
+</html>

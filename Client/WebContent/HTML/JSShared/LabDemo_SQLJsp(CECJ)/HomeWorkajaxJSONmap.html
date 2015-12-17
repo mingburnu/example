@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <title></title>
+    <link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+ <!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <style type="text/css">
+        table{border:1px solid green;
+              width:450px;
+              border-collapse:collapse;
+              display:none;
+        }
+        th{border:1px solid green;
+           border-bottom:3px double red;
+           width:150px;
+        }
+        td{border:1px solid green;}    
+    </style>
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="ajaxXMLHttp.js"></script>
+    <script type="text/javascript">
+        var xmlHttp,theTbody;
+       /* window.onload = function () {
+            var btn = document.getElementById("buttononLoad");
+            btn.onclick = show;
+        }*/
+        //function init() {
+            var geocoder;
+            var map;
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(37.4419, -122.1419);
+                var myOptions = {
+                    zoom: 13,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            }
+
+            function codeAddress(address) {
+                //var address = document.getElementById("address").value;
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        //alert(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                        marker.setTitle(address);
+
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            }
+
+     //   }
+     
+     
+        function show(txtCity) {
+            xmlHttp = initXMLHttpRequest();
+            //var txtCity = document.getElementById("txtCity");
+            //alert(txtCity);
+            //txtCity="Taipei";
+            if (xmlHttp != null) {
+                xmlHttp.open("GET", "OrderCityHandler.jsp?orderCity="+txtCity, true);                              
+                xmlHttp.send(null);                
+                xmlHttp.onreadystatechange = returnData;
+                //var theTable = document.getElementById("table1");
+                //theTable.style.display = "none";
+            }
+            else {
+                alert("mainObject not Created");
+            }
+        }
+
+        function returnData() {
+
+            var myDiv = document.getElementById("div1");
+            
+
+            if (xmlHttp.readyState == 4) {               
+                if (xmlHttp.status == 200) {                	
+                    var theTable = document.getElementById("table1");                    
+                    theTable.style.display = "block";
+                    
+                    //var theTbody = document.getElementById("tbody1");
+                    theTbody = document.getElementById("tbody1");
+                    clearData();
+					
+                    var ods = eval('(' + xmlHttp.responseText + ')');                    
+                    
+                    for (var i = 0; i < ods.length; i++) {                    
+                        var row = document.createElement("tr");
+
+                        var cell1 = document.createElement("td");
+                        var txt1 = document.createTextNode(ods[i].OrderID);
+                        cell1.appendChild(txt1);
+
+                        var cell2 = document.createElement("td");
+                        var txt2 = document.createTextNode(ods[i].ProductID);
+                        cell2.appendChild(txt2);
+
+                        var cell3 = document.createElement("td");
+                        var txt3 = document.createTextNode(ods[i].UnitPrice);
+                        cell3.appendChild(txt3);
+
+                        var cell4 = document.createElement("td");
+                        var txt4 = document.createTextNode(ods[i].Quantity);
+                        cell4.appendChild(txt4);
+
+                        var cell5 = document.createElement("td");
+                        var txt5 = document.createTextNode(ods[i].Discount);
+                        cell5.appendChild(txt5);
+
+                        row.appendChild(cell1);
+                        row.appendChild(cell2);
+                        row.appendChild(cell3);
+                        row.appendChild(cell4);
+                        row.appendChild(cell5);
+
+                        theTbody.appendChild(row);
+                       
+                    }
+                     
+                } else {
+                    myDiv.innerHTML = "Error:" + xmlHttp.status;
+                }
+           
+            }
+
+        }
+
+        function clearData() {
+            while (theTbody.hasChildNodes()) {            	
+                theTbody.removeChild(theTbody.firstChild);
+            }
+        }
+    </script>
+</head>
+<body onload="initialize();">
+
+   <div class="bg">
+    <!--start container-->
+    <div id="container">
+    <!--start header-->
+    <header>
+      <!--start logo-->
+      <a href="#" id="logo"><img src="images/iiiedulogo.png" width="400" height="30" alt="logo"/></a>    
+      <!--end logo-->
+      <!--start menu-->
+  	   <nav>
+         <ul>
+         <li><a href="index.html" class="current">Home</a></li>
+         <li><a href="Register.html">Register</a></li>
+     	   <li><a href="shopping_cart.html">shopping_cart</a></li>
+     	   <li><a href="HomeWorkajaxJSONmap.html">map</a></li>
+           <li><a href="Login.html">Login</a></li>
+         </ul>
+      </nav>
+  	   <!--end menu-->
+      <!--end header-->
+	</header>
+   <!--start intro-->
+   <section id="intro">
+      <hgroup>
+      <h1 style="font-family: 標楷體">"台灣資訊化的推手"<span>- 資訊工業策進會</span></h1>
+      <h2 style="font-family: 標楷體">邁向資訊化社會是全球必然的趨勢與潮流，而發展的關鍵就在資訊教育的成果。資策會早在這種風潮萌芽之初，即由享有台灣『科技教父』之稱的前行政院李政務委員國鼎先生大力推動，於民國68年7月成立財團法人資訊工業策進會。</h2>
+      </hgroup>
+   </section>
+   <!--end intro-->
+   <!--start holder-->
+   <div class="holder_content">
+       
+   	
+    <div style="float:left;width:200px;height:343px;margin-top:20px;">
+<img id="imgMap" alt="" src="images/map00.gif" style="float: left;margin-right: 10px;width: 189px; height: 343px" usemap="#FPMap0"/>
+<map id="FPMap0" name="FPMap0">
+                 <area alt="" coords="136,21,144,13,151,29,145,38,137,21" onmouseover="document.getElementById('imgMap').src='images/Taipei.gif';" onmouseout="document.getElementById('imgMap').src='images/map00.gif';"  onclick="codeAddress('台北市大安區復興南路一段390號');show('Taipei');" shape="polygon" />
+                 <area alt="" coords="95,38,120,22,132,34,125,45,138,64,128,78,95,37" onmouseover="document.getElementById('imgMap').src='images/Chungli.gif';" onmouseout="document.getElementById('imgMap').src='images/map00.gif';"  onclick="codeAddress('中壢市中大路300號');show('Chungli');" shape="polygon" />
+                 <area alt="" coords="46,113,58,89,87,104,120,91,134,100,122,113,81,122,70,134,45,112,45,112" onmouseover="document.getElementById('imgMap').src='images/Taichung.gif';" onmouseout="document.getElementById('imgMap').src='images/map00.gif';" onclick="codeAddress('台中市河南路二段262號14樓');show('Taichung');" shape="polygon" />
+                 <area alt="" coords="18,241,39,242,86,185,98,201,76,243,72,250,46,251,39,283,25,259,18,240" onmouseover="document.getElementById('imgMap').src='images/Kaohsiung.gif';" onmouseout="document.getElementById('imgMap').src='images/map00.gif';"  onclick="codeAddress('高雄市前金區中正四路211號8樓之1');show('Kaohsiung');" shape="polygon" />
+                </map>
+ </div>               
+<div id="map_canvas" style="float:left;margin-right: 10px;width:500px;height:300px;margin-top:20px"></div>
+<div style="float:left;width:500px;height:400px;margin-top:20px">
+<table id="table1">
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>產品編號</th>
+            <th>產品價格</th>
+            <th>訂購數量</th>
+            <th>折扣</th>
+        </tr>
+    </thead>
+    <tbody id="tbody1"></tbody>
+</table>
+</div>
+<div id="div1"></div>
+
+
+	</div>
+	<!--end holder-->
+   <!--start holder-->
+   <div class="holder_content">
+      <section class="group4">
+         <h3>Latest article</h3>
+         <article>
+         <h4>22.08.2011  - Design to express </h4>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst.</p>
+         </article> 
+       </section>
+   </div>
+   <!--end holder-->
+   </div>
+   <!--end container-->
+   <!--start footer-->
+   <footer>
+      <div class="container">  
+         <div id="FooterTwo"> © 2011 Minimalism </div>
+         <div id="FooterTree"> Valid html5, design and code by <a href="http://www.marijazaric.com">marija zaric - creative simplicity</a> </div> 
+      </div>
+   </footer>
+   <!--end footer-->
+   </div>
+   <!--end bg-->
+   <!-- Free template distributed by http://freehtml5templates.com -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>05locationHref.html</title>	
+		<script>
+			var linker=new Array();
+			linker[0]="#";
+			linker[1]="http://www.iiiedu.org.tw/taipei/";
+			linker[2]="http://www.yahoo.com/";
+			linker[3]="http://www.google.com.tw";
+		  function redirect(x){
+		      //alert(x);
+		      location.href=linker[x];
+		  }
+			
+		</script>	
+	</head>
+
+	<body>
+		<select onchange="redirect(selectedIndex);" >
+			<option>selected</option>
+			<option>IIIEDU</option>
+			<option>KIMO</option>
+			<option>GOOGLE</option>			
+		</select>
+	</body>
+</html>

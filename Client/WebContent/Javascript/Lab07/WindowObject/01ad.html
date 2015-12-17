@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01ad.html</title>	
+		<script>
+			var t=window.setTimeout("window.close();",2000);
+			//window.setTimeout("window.location.href='http://www.google.com.tw';",1000);
+		</script>	
+	</head>
+
+	<body>
+		<input type="button" value="關閉自己" onclick="window.close();"/>
+		<input type="button" value="關閉父視窗" onclick="opener.close();"/>
+		<input type="button" value="goto 01a.html" onclick="window.location.href='01a.html';"/>
+		<input type="button" value="停止關閉" onclick="window.clearTimeout(t);"/>		
+	</body>
+</html>

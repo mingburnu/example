@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  .s1{
+     color:green;
+	 text-transform:uppercase;
+	 text-decoration:none;
+	 background-color:red;
+  }
+  .s2{
+     color:blue;
+	 text-transform:lowercase;
+	 text-decoration:underline;
+	 background-color:yellow;
+  }
+</style>
+</head>
+<body>
+<h1>write less, do more</h1>
+<h1>write less, do more</h1>
+<h1>write less, do more</h1>
+<h1>write less, do more</h1>
+<h1>write less, do more</h1>
+<hr>
+<input type="button" value="setup" id="buttonStyle">
+<h2 id="myH">write less, do more</h2>
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script src="Scripts/jquery-ui-1.10.4.effects.min.js"></script>
+
+<script>
+  //$('h1').css('color','green');
+  /*
+  $('h1').mouseover(function(){
+	  $(this).css('color','blue');
+  });
+  $('h1').mouseout(function(){
+	  $(this).css('color','green');
+  });
+  */
+  
+  //DOM
+  /*
+  $('h1').mouseover(over);
+  $('h1').mouseout(out);*/
+  
+  /*$('h1').css('color','green')
+         .css('text-transform','uppercase')
+         .css('text-decoration','none')
+       
+  $('h1').css({'color':'green',
+	           'text-transform':'uppercase',
+	           'text-decoration':'none'}) */
+$('h1').addClass('s1')   
+       .hover(over,out) 
+       .click(function(){
+        	 alert('click!!');
+       	 });
+  
+  function over(){
+	 /* $(this).css({'color':'blue',
+		           'text-transform':'lowercase',
+		           'text-decoration':'underline'});*/
+	 // $(this).removeClass('s1').addClass('s2')
+	 $(this).switchClass('s1','s2',1000);
+  }
+  function out(){
+	 /* $(this).css({'color':'green',
+          'text-transform':'uppercase',
+          'text-decoration':'none'});*/
+	 // $(this).removeClass('s2').addClass('s1')
+	  $(this).switchClass('s2','s1',1000);
+  }
+  
+  
+  $('#buttonStyle').click(function(){
+	 /* if($('#myH').hasClass('s2')){
+		  $('#myH').removeClass('s2');
+	  }else{
+		  $('#myH').addClass('s2');		  
+	  }*/
+	  $('#myH').toggleClass('s2',1000);
+  });
+  
+  /* 
+  var hs = document.getElementsByTagName("h1");
+  for(var i=0,max=hs.length;i<max;i++){
+	  hs[i].style.color = "green";
+	  hs[i].onmouseover = function(){
+		  this.style.color = "blue";
+	  };
+	  hs[i].onmouseout = function(){
+		  this.style.color = "green";
+	  };
+  }*/
+</script>
+</body>
+</html>

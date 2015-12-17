@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>BasicWeb</display-name>
+	
+	<security-role>
+		<role-name>Admiral</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Commodore</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Private</role-name>
+	</security-role>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Demo Realm</realm-name>
+	</login-config>
+
+<!--
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/form/login.jsp</form-login-page>
+			<form-error-page>/form/error.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+-->
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>XXX</web-resource-name>
+			<url-pattern>/dir1/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admiral</role-name>
+			<role-name>Commodore</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>OOO</web-resource-name>
+			<url-pattern>/dir2/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admiral</role-name>
+			<role-name>Private</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

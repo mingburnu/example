@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="Styles/jquery-ui-1.10.4.tab.min.css">
+<style>
+  #tabs{width:500px;
+    margin:0 auto;
+    } 
+</style>
+</head>
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Java</a></li>
+    <li><a href="#tabs-2">Microsoft</a></li>
+    <li><a href="#tabs-3">PMP</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>根據調查，三大熱門資訊就業方向(系統與網路管理、應用程式與網頁開發、資料庫設計與電子商務之建置管理),Windows,Java及 Oracle 將佔據超過八成的市場佔有率。</p>
+    </div>
+  <div id="tabs-2">
+  <p>近來，Microsoft .NET技術在巿場上急速升溫，在Microsoft大力推波助瀾下，廠商在對熟悉Microsoft .NET技術『求才若渴』。使用.NET技術及Microsoft 新一代的開發工具讓您快速又有效率進入程式設計領域，開發企業級應用程式並兼顧藝術視覺效果的2D與3D創意設計介面。</p>
+    </div>
+  <div id="tabs-3">
+    <p>擁有專案管理知識卻無法有效應用在工作中?專案經理、專案部門主管、公司決策群的中高階主管如何極大化現有崗位所能展現的專案管理價值？甚至做好準備邁向更高層級的挑戰?</p>
+      </div>
+</div>
+
+
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script src="Scripts/jquery-ui-1.10.4.tab.min.js"></script>
+ <script>
+ $( "#tabs" ).tabs({
+     event: "mouseover"
+   });
+ </script>
+</body>
+</html>

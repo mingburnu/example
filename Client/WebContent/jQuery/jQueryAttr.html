@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="jQueryContent.html">Content</a> | 
+<a href="jQueryFirst.html">First</a> | 
+<a href="http://tw.yahoo.com">YAHOO</a> | 
+<a href="http://www.google.com.tw">Google</a>
+<hr>
+<input type="button" value="check" id="buttonToggle">
+<input type="checkbox" name="Toggle">Toggle<br>
+<input type="checkbox" name="A" value="a1">A1
+<input type="checkbox" name="A" value="a2">A2
+<input type="checkbox" name="A" value="a3">A3
+<input type="checkbox" name="A" value="a4">A4
+<input type="checkbox" name="A" value="a5">A5
+
+<script src="Scripts/jquery-1.11.0.min.js"></script>
+<script>
+$('a[href^="http"]').attr('target','_blank');
+//console.log($(':checkbox:eq(0)').attr('checked'));
+//console.log($(':checkbox:eq(1)').attr('checked'));
+//console.log($(':checkbox:eq(2)').attr('checked'));
+//console.log($(':checkbox:eq(3)').attr('checked'));
+//console.log($(':checkbox:eq(4)').attr('checked'));
+$(':checkbox[name="Toggle"]').change(function(){
+	//alert($(this).prop("checked"));
+	/*if($(this).attr("checked") == "checked"){
+		$(':checkbox[name="A"]').attr('checked','checked');
+	}else{
+		$(':checkbox[name="A"]').removeAttr('checked');
+	}*/
+	var b = $(this).prop("checked");
+	$(':checkbox[name="A"]').prop('checked',b);
+});
+$('#buttonToggle').click(function(){
+	if($(this).val() == "check"){
+		//$(':checkbox[name="A"]').attr('checked','checked');
+		$(':checkbox[name="A"]').prop('checked',true);
+		$(this).val("uncheck");
+	}else{
+		//$(':checkbox[name="A"]').removeAttr('checked');
+		$(':checkbox[name="A"]').prop('checked',false);
+		$(this).val("check");
+	}
+})
+</script>
+</body>
+</html>

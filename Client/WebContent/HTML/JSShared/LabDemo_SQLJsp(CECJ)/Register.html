@@ -1,0 +1,706 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>		
+    <title>Register</title>
+    <!--
+    <link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
+    -->
+ <!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!--
+<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/>
+--> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+<!--
+<link rel="sttylesheet" type="text/css" href="css/Register.css"/> 
+-->
+<style type="text/css">
+	.spanwidth{width:150px;color:red}
+	#spanLastName,#spanAccount{left:2em;position:relative;display:inline-block;zoom:1;}
+	#spanFirstName{left:4em;position:relative;display:inline-block;zoom:1;}
+	fieldset{width:600px;}
+</style>   
+    <script type="text/javascript" src="ajaxXMLHttp.js"></script>
+    <script type="text/javascript">
+        var xmlHttp;
+        window.onload = function () {
+            document.getElementById("idLastName").onblur = function () { NameBlur(this) };
+            document.getElementById("idLastName").onfocus = function () { NameFocus(this) };
+            document.getElementById("idFirstName").onblur = function () { NameBlur(this) };
+            document.getElementById("idFirstName").onfocus = function () { NameFocus(this) };
+            document.getElementById("idAccount").onblur = function () { NameBlur(this) };
+            document.getElementById("idAccount").onfocus = function () { NameFocus(this) };
+            document.getElementById("btnCheckAccount").onclick =  checkAccount ;
+            document.getElementById("btnCreateAccount").onclick = createAccount;
+		    document.getElementById("idPassword").onblur=chkPassword;
+		    document.getElementById("idConfPassword").onblur=confPassword;
+            var d = new Date();
+            var endYear = d.getFullYear();
+            for (i = 1900; i <= endYear; i++) {     //新增年
+                var opt = window.document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById('idSelectYear').appendChild(opt);
+            }
+
+            for (i = 1; i <= 12; i++) {   //新增月	
+                var opt = window.document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById('idSelectMonth').appendChild(opt);
+            }
+            addDay();
+        }  //window.onload
+
+        function addDay() {		//新增日
+            var dlen = document.getElementById('idSelectDay').length;
+            for (var i = 1; i < dlen; i++) {
+                var opts = document.getElementById('idSelectDay').childNodes[1]; document.getElementById('idSelectDay').removeChild(opts);
+            }
+            var yy = document.getElementById('idSelectYear').value;
+            var mm = document.getElementById('idSelectMonth').value;
+            var date = new Date(yy, mm, 0);
+            var dlen = date.getDate();
+            for (i = 1; i <= dlen; i++) {
+                var opt = document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById('idSelectDay').appendChild(opt);
+            }
+        }
+
+        function NameBlur(idName) {
+            var theName = idName.value;
+            //alert(idName.id);
+            if (theName == "") {
+                var showMsg = "span" + idName.id.substr(idName.id.indexOf("id") + 2);
+                document.getElementById(showMsg).innerHTML = "這裡必須填入資料";
+            }
+        }
+
+        function NameFocus(idName) {
+            var theName = idName.value;
+            //alert(idName.id);
+            if (theName == "") {
+                var showMsg = "span" + idName.id.substr(idName.id.indexOf("id") + 2);
+                document.getElementById(showMsg).innerHTML = "";
+            }
+        }
+
+
+        function checkAccount() {
+            //alert('checkAccount');          
+
+            xmlHttp = initXMLHttpRequest();
+
+            if (xmlHttp != null) {          
+                var theEmail = document.getElementById("idAccount").value + "@iii.org.tw";             
+                xmlHttp.open("POST", "GetRegister.jsp", true);
+                xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlHttp.send("Email=" + theEmail);               
+                xmlHttp.onreadystatechange = returnCheckAccount;
+            }
+            else {
+                alert("object not create");
+            }
+        }  //checkAccount
+        
+        function returnCheckAccount() {
+            //alert("returnData");
+            if (xmlHttp.readyState == 4) {
+                //alert(xmlHttp.readyState);
+                if (xmlHttp.status == 200) {  
+                	//alert(xmlHttp.status);                
+                    var data = eval('(' + xmlHttp.responseText + ')'); 
+                    //alert(data);                                   
+                    if (data)
+                        document.getElementById("spanAccount").innerHTML = "此帳號已有人使用";                                                      
+                    else                  
+                        document.getElementById("spanAccount").innerHTML ="此帳號尚未有人使用"                                        
+                    } //if
+                else {
+                    document.getElementById("spanAccount").innerHTML = "error:" + xmlHttp.statusText;
+                    }  //if status
+            }  //if readystatus
+        }
+ 
+ 
+        
+
+        function createAccount() { 
+            xmlHttp = initXMLHttpRequest();
+            
+            if (xmlHttp != null) {
+                var theLastName = document.getElementById("idLastName").value; 
+                var theFirstName = document.getElementById("idFirstName").value;
+                var theEmail = document.getElementById("idAccount").value + "@iii.org.tw";
+                var thePassword=document.getElementById("idPassword").value;
+                var theBirthDate = document.getElementById("idSelectYear").value+"-";
+                var theBirthDate = theBirthDate + document.getElementById("idSelectMonth").value + "-";
+                var theBirthDate = theBirthDate + document.getElementById("idSelectDay").value;
+                if (document.getElementById("idmale").checked)
+                    theGender = "male";
+                else
+                    theGender = "female";
+                var theCountryCode = document.getElementById("idCountryCode").value;
+               
+                var theMobileNumber = document.getElementById("idMobileCountryCode").value + document.getElementById("idMobileNumber").value;
+                
+                var theBackupEmail = document.getElementById("idBackupEmail").value;
+                
+                 //alert(thePassword);
+                /*
+                alert(theLastName);
+                alert(theFirstName);
+                alert(theEmail);
+
+                alert(theBirthDate);
+                alert(theGender);
+                alert(theCountryCode);
+                alert(theMobileNumber);
+                alert(theBackupEmail);
+                */
+                var theAccountData="LastName="+theLastName;
+                theAccountData = theAccountData + "&FirstName=" + theFirstName;
+                theAccountData = theAccountData + "&Email=" + theEmail;
+                theAccountData = theAccountData + "&Password=" + thePassword;
+                theAccountData = theAccountData + "&BirthDate=" + theBirthDate;
+                theAccountData = theAccountData + "&Gender=" + theGender;
+                theAccountData = theAccountData + "&CountryCode=" + theCountryCode;
+                theAccountData = theAccountData + "&MobileNumber=" + theMobileNumber;
+                theAccountData = theAccountData + "&BackupEmail=" + theBackupEmail;
+                theAccountData = theAccountData + "&Active=" + "false";
+                //alert("create");
+                xmlHttp.open("POST", "CreateAccountHandler.jsp", true);
+                xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                //xmlHttp.send("Email=" + theEmail+"&"+LastName" + theLastName);
+                xmlHttp.send(theAccountData);
+                //alert(theAccountData);
+                xmlHttp.onreadystatechange = returnCreateAccount;
+
+            }
+            else {
+                alert("object not create");
+            } 
+        }
+
+        function returnCreateAccount() {
+            //alert("returnData");
+            if (xmlHttp.readyState == 4) {
+                //alert("a");
+                if (xmlHttp.status == 200) {
+                    //alert("b");
+                    var data = eval('(' + xmlHttp.responseText + ')');
+                    
+                    //alert(xmlHttp.responseText);
+                    if (data == 0)
+                        alert("create Failure");
+                    else
+                        alert("create Successful");
+                   
+                } //if
+                else {
+                    document.getElementById("spanAccount").innerHTML = "error:" + xmlHttp.statusText;
+                }
+
+            }
+        }
+    function chkPassword(){
+				var pwObj=document.getElementById("idPassword")
+				var PwValue=pwObj.value;
+				var pwAlertObj=document.getElementById("spanPassword");
+				
+				re=/^(?=.*[0-9])(?=.*[A-Za-z])(?=.*[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E])\S{6,}$/;
+				
+				if (re.test(PwValue)){
+					pwAlertObj.innerHTML=("");
+					pwAlertObj.innerHTML=("密碼格式正確,你輸入的密碼是："+PwValue);
+				}else{
+					pwAlertObj.innerHTML=("密碼最少6個字，必須包含必須包含英文、數字、特殊符號");
+				}
+				
+				
+				
+				
+			}
+	function confPassword(){
+		var pwObj=document.getElementById("idPassword")
+		var PwValue=pwObj.value;
+		var pwConfObj=document.getElementById("idConfPassword")
+		var PwConfValue=pwConfObj.value;
+		var pwConfAlertObj=document.getElementById("spanConfPassword");
+		
+			
+		if(PwValue!=PwConfValue){
+				
+			pwConfAlertObj.innerHTML="密碼不相符,請再試一次";
+			pwConfObj.focus();
+		}
+		else{
+			pwConfAlertObj.innerHTML="";
+		}
+	}
+    </script>
+</head>
+<body>
+   <div class="bg">
+    <!--start container-->
+    <div id="container">
+    <!--start header-->
+    <header>
+      <!--start logo-->
+      <a href="#" id="logo"><img src="images/iiiedulogo.png" width="400" height="30" alt="logo"/></a>    
+      <!--end logo-->
+      <!--start menu-->
+  	   <nav>
+         <ul>
+         <li><a href="index.html" class="current">Home</a></li>
+         <li><a href="Register.html">Register</a></li>
+     	   <li><a href="shopping_cart.html">shopping_cart</a></li>
+     	   <li><a href="HomeWorkajaxJSONmap.html">map</a></li>
+           <li><a href="Login.html">Login</a></li>
+         </ul>
+      </nav>
+  	   <!--end menu-->
+      <!--end header-->
+	</header>
+   <!--start intro-->
+   <section id="intro">
+      <hgroup>
+      <h1 style="font-family: 標楷體">"台灣資訊化的推手"<span>- 資訊工業策進會</span></h1>
+      <h2 style="font-family: 標楷體">邁向資訊化社會是全球必然的趨勢與潮流，而發展的關鍵就在資訊教育的成果。資策會早在這種風潮萌芽之初，即由享有台灣『科技教父』之稱的前行政院李政務委員國鼎先生大力推動，於民國68年7月成立財團法人資訊工業策進會。</h2>
+      </hgroup>
+   </section>
+   <!--end intro-->
+   <!--start holder-->
+   <div class="holder_content">
+         <form action="">
+        <fieldset >
+            <legend>建立帳號基本資料</legend>
+            <div>
+            姓名<input type="text" name="txtLastName" id="idLastName" title="姓"  placeholder="姓" required="required"  />
+               
+            
+                <input type="text" name="txtFirstName" id="idFirstName" title="名"  placeholder="名" />           
+                 <br />
+                 <span class="spanwidth" id="spanLastName" ></span>
+                 <span class="spanwidth"id="spanFirstName"></span>
+                 
+            </div>
+            <div>
+                <label >帳號</label> 
+                <input type="text" name="txtAccount" id="idAccount" title="帳號"  />
+                <span >@</span>               
+                <select>
+                    <option value="iii.org.tw">iii.org.tw</option>
+                    <option value="iiiedu.iii.org.tw">iiiedu.iii.org.tw</option>
+                </select>                                   
+                <input type="button" id="btnCheckAccount" class="graybtn" value="檢查" style="display:display"/>
+                <br />
+                <span class="spanwidth" id="spanAccount" ></span>
+           </div>
+           <div>
+           	建立密碼:<input type="password" id="idPassword"min="6" max="10">
+           	<span class="spanwidth" id="spanPassword" ></span><br>
+           	確認密碼:<input type="password" id="idConfPassword" min="6" max="10">
+           	<span class="spanwidth" id="spanConfPassword" ></span>
+           </div>
+           </fieldset>
+           <br /> <br />
+           <fieldset>
+                <legend>個人基本資料</legend>
+                <div>
+                    出生日期
+                    <select id="idSelectYear" onchange="addDay();"></select>年
+	                <select id="idSelectMonth" onchange="addDay();"></select>月
+	                <select id="idSelectDay"></select>日
+                </div>
+                <div>
+                性別<input type="radio" name="gender" id="idmale" value="male" checked="checked"/>男
+                <input type="radio" name="gender" id="idfemale" value="female" />女
+                </div>
+                <div>
+                國家<select id="idCountryCode" name="CountryCode">
+                      <option  value="YE">也門 (‫اليمن‬‎)</option>
+                      <option  value="TT">千里達及托巴哥 (Trinidad and Tobago)</option>
+                      <option  value="TR">土耳其 (Türkiye)</option>
+                      <option  value="TC">土克斯及開科斯群島 (Turks and Caicos Islands)</option>
+                      <option  value="TM">土庫曼 (Turkmenistan)</option>
+                      <option  value="BT">不丹 (འབྲུག)</option>
+                      <option  value="CF">中非共和國 (République centrafricaine)</option>
+                      <option  value="CN">中華人民共和國 (中国)</option>
+                      <option  value="DK">丹麥 (Danmark)</option>
+                      <option  value="EC">厄瓜多 (Ecuador)</option>
+                      <option  value="ER">厄利垂亞 (Eritrea)</option>
+                      <option  value="PG">巴布亞紐幾內亞 (Papua New Guinea)</option>
+                      <option  value="BR">巴西 (Brasil)</option>
+                      <option  value="BB">巴貝多 (Barbados)</option>
+                      <option  value="PY">巴拉圭 (Paraguay)</option>
+                      <option  value="BH">巴林 (‫البحرين‬‎)</option>
+                      <option  value="BS">巴哈馬 (Bahamas)</option>
+                      <option  value="PA">巴拿馬 (Panamá)</option>
+                      <option  value="PS">巴勒斯坦 (‫فلسطين‬‎)</option>
+                      <option  value="PK">巴基斯坦 (‫پاکستان‬‎)</option>
+                      <option  value="JP">日本</option>
+                      <option  value="BE">比利時 (België)</option>
+                      <option  value="JM">牙買加 (Jamaica)</option>
+                      <option  value="IL">以色列 (‫ישראל‬‎)</option>
+                      <option  value="IC">加那利群島 (Islas Canarias)</option>
+                      <option  value="CA">加拿大 (Canada)</option>
+                      <option  value="GA">加彭 (Gabon)</option>
+                      <option  value="MP">北馬里亞納群島 (Northern Mariana Islands)</option>
+                      <option  value="KP">北韓 (조선 민주주의 인민 공화국)</option>
+                      <option  value="QA">卡達 (‫قطر‬‎)</option>
+                      <option  value="CC">可可斯群島 (Cocos [Keeling] Islands)</option>
+                      <option  value="CU">古巴 (Cuba)</option>
+                      <option  value="SZ">史瓦濟蘭 (Swaziland)</option>
+                      <option  value="TW"selected="selected">台灣</option>
+                      <option  value="NE">尼日 (Nijar)</option>
+                      <option  value="NI">尼加拉瓜 (Nicaragua)</option>
+                      <option  value="NP">尼泊爾 (नेपाल)</option>
+                      <option  value="BV">布威島 (Bouvet Island)</option>
+                      <option  value="BF">布基納法索 (Burkina Faso)</option>
+                      <option  value="GT">瓜地馬拉 (Guatemala)</option>
+                      <option  value="WF">瓦利斯和福杜納群島 (Wallis and Futuna)</option>
+                      <option  value="GM">甘比亞 (Gambia)</option>
+                      <option  value="BY">白俄羅斯 (Беларусь)</option>
+                      <option  value="PN">皮特康 (Pitcairn Islands)</option>
+                      <option  value="LT">立陶宛 (Lietuva)</option>
+                      <option  value="IQ">伊拉克 (‫العراق‬‎)</option>
+                      <option  value="IR">伊朗 (‫ایران‬‎)</option>
+                      <option  value="EA">休達與梅利利亞 (Ceuta y Melilla)</option>
+                      <option  value="IS">冰島 (Ísland)</option>
+                      <option  value="LI">列支敦士登 (Liechtenstein)</option>
+                      <option  value="HU">匈牙利 (Magyarország)</option>
+                      <option  value="ID">印尼 (Indonesia)</option>
+                      <option  value="IN">印度 (भारत)</option>
+                      <option  value="DJ">吉布地 (Djibouti)</option>
+                      <option  value="KG">吉爾吉斯 (Kyrgyzstan)</option>
+                      <option  value="TV">吐瓦魯 (Tuvalu)</option>
+                      <option  value="DM">多明尼加 (Dominica)</option>
+                      <option  value="DO">多明尼加共和國 (República Dominicana)</option>
+                      <option  value="TG">多哥共和國 (Togo)</option>
+                      <option  value="AG">安地卡及巴布達 (Antigua and Barbuda)</option>
+                      <option  value="AI">安圭拉島 (Anguilla)</option>
+                      <option  value="AO">安哥拉 (Angola)</option>
+                      <option  value="AD">安道爾 (Andorra)</option>
+                      <option  value="TK">托克勞群島 (Tokelau)</option>
+                      <option  value="BM">百慕達 (Bermuda)</option>
+                      <option  value="ET">衣索比亞 (Ethiopia)</option>
+                      <option  value="ES">西班牙 (España)</option>
+                      <option  value="EH">西撒哈拉 (‫الصحراء الغربية‬‎)</option>
+                      <option  value="CP">克里派頓島 (Île Clipperton)</option>
+                      <option  value="HR">克羅地亞 (Hrvatska)</option>
+                      <option  value="SJ">冷岸及央麥恩群島 (Svalbard og Jan Mayen)</option>
+                      <option  value="LY">利比亞 (‫ليبيا‬‎)</option>
+                      <option  value="HN">宏都拉斯 (Honduras)</option>
+                      <option  value="GR">希臘 (Ελλάδα)</option>
+                      <option  value="SA">沙烏地阿拉伯 (‫المملكة العربية السعودية‬‎)</option>
+                      <option  value="BN">汶萊 (Brunei)</option>
+                      <option  value="BZ">貝里斯 (Belize)</option>
+                      <option  value="BJ">貝寧 (Bénin)</option>
+                      <option  value="GQ">赤道幾內亞 (Guinea Ecuatorial)</option>
+                      <option  value="AM">亞美尼亞 (Հայաստան)</option>
+                      <option  value="AZ">亞塞拜然 (Azərbaycan)</option>
+                      <option  value="AX">亞蘭群島 (Åland)</option>
+                      <option  value="TZ">坦尚尼亞 (Tanzania)</option>
+                      <option  value="NG">奈及利亞 (Nigeria)</option>
+                      <option  value="VE">委內瑞拉 (Venezuela)</option>
+                      <option  value="BD">孟加拉 (বাংলাদেশ)</option>
+                      <option  value="ZM">尚比亞 (Zambia)</option>
+                      <option  value="PW">帛琉 (Palau)</option>
+                      <option  value="LV">拉脫維亞 (Latvija)</option>
+                      <option  value="TO">東加 (Tonga)</option>
+                      <option  value="TL">東帝汶 (Timor-Leste)</option>
+                      <option  value="BA">波士尼亞與赫塞格維納 (Босна и Херцеговина)</option>
+                      <option  value="PR">波多黎各 (Puerto Rico)</option>
+                      <option  value="PL">波蘭 (Polska)</option>
+                      <option  value="FR">法國 (France)</option>
+                      <option  value="FO">法羅群島 (Føroyar)</option>
+                      <option  value="GF">法屬圭亞那 (Guyane française)</option>
+                      <option  value="TF">法屬南方屬地 (Terres australes françaises)</option>
+                      <option  value="PF">法屬玻里尼西亞 (Polynésie française)</option>
+                      <option  value="GI">直布羅陀 (Gibraltar)</option>
+                      <option  value="KE">肯亞 (Kenya)</option>
+                      <option  value="FI">芬蘭 (Suomi)</option>
+                      <option  value="AE">阿拉伯聯合大公國 (‫الإمارات العربية المتحدة‬‎)</option>
+                      <option  value="AR">阿根廷 (Argentina)</option>
+                      <option  value="OM">阿曼王國 (‫عُمان‬‎)</option>
+                      <option  value="AF">阿富汗 (‫افغانستان‬‎)</option>
+                      <option  value="AC">阿森松島 (Ascension Island)</option>
+                      <option  value="AW">阿路巴 (Aruba)</option>
+                      <option  value="DZ">阿爾及利亞 (‫الجزائر‬‎)</option>
+                      <option  value="AL">阿爾巴尼亞 (Shqipëria)</option>
+                      <option  value="BG">保加利亞 (България)</option>
+                      <option  value="RU">俄羅斯 (Россия)</option>
+                      <option  value="ZA">南非 (South Africa)</option>
+                      <option  value="GS">南喬治亞與南三明治群島 (South Georgia and the South Sandwich Islands)</option>
+                      <option  value="AQ">南極洲 (Antarctica)</option>
+                      <option  value="KR">南韓 (대한민국)</option>
+                      <option  value="SS">南蘇丹 (‫جنوب السودان‬‎)</option>
+                      <option  value="KZ">哈薩克 (Казахстан)</option>
+                      <option  value="KH">柬埔寨 (កម្ពុជា)</option>
+                      <option  value="TD">查德 (Tchad)</option>
+                      <option  value="ZW">津巴布韋 (Zimbabwe)</option>
+                      <option  value="BO">玻利維亞 (Bolivia)</option>
+                      <option  value="KW">科威特 (‫الكويت‬‎)</option>
+                      <option  value="CI">科特迪瓦 (Côte d’Ivoire)</option>
+                      <option  value="XK">科索夫 (Косово)</option>
+                      <option  value="KM">科摩羅群島 (‫جزر القمر‬‎)</option>
+                      <option  value="TN">突尼西亞 (‫تونس‬‎)</option>
+                      <option  value="JO">約旦 (‫الأردن‬‎)</option>
+                      <option  value="US">美國 (United States)</option>
+                      <option  value="VI">美屬維京群島 (U.S. Virgin Islands)</option>
+                      <option  value="AS">美屬薩摩亞群島 (American Samoa)</option>
+                      <option  value="UM">美屬邊疆群島 (U.S. Outlying Islands)</option>
+                      <option  value="MR">茅利塔尼亞 (‫موريتانيا‬‎)</option>
+                      <option  value="GB">英國 (United Kingdom)</option>
+                      <option  value="IO">英屬印度洋領土 (British Indian Ocean Territory)</option>
+                      <option  value="VG">英屬維京群島 (British Virgin Islands)</option>
+                      <option  value="GH">迦納 (Gaana)</option>
+                      <option  value="DG">迪亞哥加西亞島 (Diego Garcia)</option>
+                      <option  value="HK">香港</option>
+                      <option  value="CG">剛果（布拉薩） (Congo-Brazzaville)</option>
+                      <option  value="CD">剛果（金夏沙） (Jamhuri ya Kidemokrasia ya Kongo)</option>
+                      <option  value="CO">哥倫比亞 (Colombia)</option>
+                      <option  value="CR">哥斯大黎加 (Costa Rica)</option>
+                      <option  value="GP">哥德普洛 (Guadeloupe)</option>
+                      <option  value="EG">埃及 (‫مصر‬‎)</option>
+                      <option  value="CK">庫克群島 (Cook Islands)</option>
+                      <option  value="CW">庫拉索 (Curaçao)</option>
+                      <option  value="NO">挪威 (Norge)</option>
+                      <option  value="GG">根西島 (Guernsey)</option>
+                      <option  value="GL">格陵蘭 (Kalaallit Nunaat)</option>
+                      <option  value="GD">格瑞納達 (Grenada)</option>
+                      <option  value="TH">泰國 (ไทย)</option>
+                      <option  value="HT">海地 (Haiti)</option>
+                      <option  value="UG">烏干達 (Uganda)</option>
+                      <option  value="UA">烏克蘭 (Україна)</option>
+                      <option  value="UY">烏拉圭 (Uruguay)</option>
+                      <option  value="UZ">烏茲別克 (Ўзбекистон)</option>
+                      <option  value="TA">特里斯坦達庫尼亞群島 (Tristan da Cunha)</option>
+                      <option  value="RE">留尼旺 (Réunion)</option>
+                      <option  value="PE">秘魯 (Perú)</option>
+                      <option  value="SO">索馬利亞 (Soomaaliya)</option>
+                      <option  value="SB">索羅門群島 (Solomon Islands)</option>
+                      <option  value="NZ">紐西蘭 (New Zealand)</option>
+                      <option  value="NU">紐威島 (Niue)</option>
+                      <option  value="NA">納米比亞 (Namibia)</option>
+                      <option  value="MQ">馬丁尼克島 (Martinique)</option>
+                      <option  value="ML">馬利 (Mali)</option>
+                      <option  value="MY">馬來西亞 (Malaysia)</option>
+                      <option  value="MK">馬其頓 (Македонија)</option>
+                      <option  value="MW">馬拉維 (Malawi)</option>
+                      <option  value="YT">馬約特 (Mayotte)</option>
+                      <option  value="MH">馬紹爾群島 (Marshall Islands)</option>
+                      <option  value="MG">馬達加斯加 (Madagasikara)</option>
+                      <option  value="MT">馬爾他 (Malta)</option>
+                      <option  value="MV">馬爾地夫 (Maldives)</option>
+                      <option  value="IM">曼島 (Isle of Man)</option>
+                      <option  value="KI">基里巴斯 (Kiribati)</option>
+                      <option  value="FM">密克羅尼西亞群島 (Micronesia)</option>
+                      <option  value="CZ">捷克共和國 (Česká republika)</option>
+                      <option  value="SY">敘利亞 (‫سوريا‬‎)</option>
+                      <option  value="VA">梵蒂岡 (Città del Vaticano)</option>
+                      <option  value="MZ">莫三比克 (Moçambique)</option>
+                      <option  value="NL">荷蘭 (Nederland)</option>
+                      <option  value="BQ">荷蘭加勒比區 (Caribbean Netherlands)</option>
+                      <option  value="SX">荷属圣马丁 (Sint Maarten)</option>
+                      <option  value="BW">博茨瓦納 (Botswana)</option>
+                      <option  value="CM">喀麥隆 (Cameroun)</option>
+                      <option  value="GE">喬治亞共和國 (საქართველო)</option>
+                      <option  value="GN">幾內亞 (Guinée)</option>
+                      <option  value="GW">幾內亞比紹 (Guiné Bissau)</option>
+                      <option  value="FJ">斐濟 (Fiji)</option>
+                      <option  value="LK">斯里蘭卡 (ශ්‍රී ලංකාව)</option>
+                      <option  value="SK">斯洛伐克 (Slovensko)</option>
+                      <option  value="SI">斯洛維尼亞 (Slovenija)</option>
+                      <option  value="CL">智利 (Chile)</option>
+                      <option  value="PH">菲律賓 (Philippines)</option>
+                      <option  value="VN">越南 (Việt Nam)</option>
+                      <option  value="KY">開曼群島 (Cayman Islands)</option>
+                      <option  value="SN">塞內加爾 (Sénégal)</option>
+                      <option  value="SL">塞拉利昂 (Sierra Leone)</option>
+                      <option  value="SC">塞席爾 (Seychelles)</option>
+                      <option  value="RS">塞爾維亞 (Србија)</option>
+                      <option  value="TJ">塔吉克 (Tajikistan)</option>
+                      <option  value="AT">奧地利 (Österreich)</option>
+                      <option  value="EE">愛沙尼亞 (Eesti)</option>
+                      <option  value="IE">愛爾蘭 (Ireland)</option>
+                      <option  value="SG">新加坡 (Singapore)</option>
+                      <option  value="NC">新喀里多尼亞群島 (Nouvelle-Calédonie)</option>
+                      <option  value="CH">瑞士 (Schweiz)</option>
+                      <option  value="SE">瑞典 (Sverige)</option>
+                      <option  value="VU">萬那杜 (Vanuatu)</option>
+                      <option  value="IT">義大利 (Italia)</option>
+                      <option  value="BL">聖巴瑟米 (Saint-Barthélémy)</option>
+                      <option  value="VC">聖文森及格瑞那丁 (Saint Vincent and the Grenadines)</option>
+                      <option  value="PM">聖皮埃爾和密克隆群島 (Saint-Pierre-et-Miquelon)</option>
+                      <option  value="ST">聖多美及普林西比 (São Tomé e Príncipe)</option>
+                      <option  value="KN">聖克里斯多福及尼維斯 (Saint Kitts and Nevis)</option>
+                      <option  value="MF">聖馬丁 (Saint-Martin [partie française])</option>
+                      <option  value="SM">聖馬利諾 (San Marino)</option>
+                      <option  value="SH">聖赫勒拿島 (Saint Helena)</option>
+                      <option  value="CX">聖誕島 (Christmas Island)</option>
+                      <option  value="LC">聖露西亞 (Saint Lucia)</option>
+                      <option  value="PT">葡萄牙 (Portugal)</option>
+                      <option  value="FK">福克蘭群島 (Falkland Islands [Islas Malvinas])</option>
+                      <option  value="CV">維德角 (Kabu Verdi)</option>
+                      <option  value="MN">蒙古 (Монгол)</option>
+                      <option  value="ME">蒙特內哥羅 (Crna Gora)</option>
+                      <option  value="MS">蒙特色拉特島 (Montserrat)</option>
+                      <option  value="BI">蒲隆地 (Uburundi)</option>
+                      <option  value="GY">蓋亞納 (Guyana)</option>
+                      <option  value="HM">赫德與麥克當諾群島 (Heard Island and McDonald Islands)</option>
+                      <option  value="LA">寮國 (ສ.ປ.ປ ລາວ)</option>
+                      <option  value="DE">德國 (Deutschland)</option>
+                      <option  value="MA">摩洛哥 (‫المغرب‬‎)</option>
+                      <option  value="MC">摩納哥 (Monaco)</option>
+                      <option  value="MD">摩爾多瓦 (Republica Moldova)</option>
+                      <option  value="MU">模里西斯 (Moris)</option>
+                      <option  value="MM">緬甸 (မြန်မာ)</option>
+                      <option  value="LB">黎巴嫩 (‫لبنان‬‎)</option>
+                      <option  value="MX">墨西哥 (México)</option>
+                      <option  value="JE">澤西島 (Jersey)</option>
+                      <option  value="MO">澳門</option>
+                      <option  value="AU">澳洲 (Australia)</option>
+                      <option  value="RW">盧旺達 (Rwanda)</option>
+                      <option  value="LU">盧森堡 (Luxembourg)</option>
+                      <option  value="NF">諾福克島 (Norfolk Island)</option>
+                      <option  value="NR">諾魯 (Nauru)</option>
+                      <option  value="LR">賴比瑞亞 (Liberia)</option>
+                      <option  value="LS">賴索扥 (Lesotho)</option>
+                      <option  value="CY">賽普勒斯 (Κύπρος)</option>
+                      <option  value="SV">薩爾瓦多 (El Salvador)</option>
+                      <option  value="WS">薩摩亞群島 (Samoa)</option>
+                      <option  value="RO">羅馬尼亞 (România)</option>
+                      <option  value="GU">關島 (Guam)</option>
+                      <option  value="SD">蘇丹 (‫السودان‬‎)</option>
+                      <option  value="SR">蘇利南 (Suriname)</option>
+                    </select> 
+                </div>
+           </fieldset>
+           <br /> <br />
+           <fieldset>
+            <legend>無法登入可協助您</legend>
+            <div >
+            手機
+                <div >
+                    <select name="MobileCountryCode" id="idMobileCountryCode">
+                    <option value="1868">千里達，托巴哥 (+1868)</option>
+                    <option value="90">土耳其 (+90)</option>
+                    <option value="1649">土克斯及開科斯群島 (+1649)</option>
+                    <option value="993">土庫曼 (+993)</option>
+                    <option value="975">不丹 (+975)</option>
+                    <option value="236">中非共和國 (+236)</option>
+                    <option value="86">中國 (+86)</option>
+                    <option value="45">丹麥 (+45)</option>
+                    <option value="593">厄瓜多 (+593)</option>
+                    <option value="291">厄利垂亞 (+291)</option>
+                    <option value="675">巴布亞紐幾內亞 (+675)</option>
+                    <option value="55">巴西 (+55)</option>
+                    <option value="1">巴貝多 (+1)</option>
+                    <option value="595">巴拉圭 (+595)</option>
+                    <option value="973">巴林 (+973)</option>
+                    <option value="1">巴哈馬 (+1)</option>
+                    <option value="507">巴拿馬 (+507)</option>
+                    <option value="92">巴基斯坦 (+92)</option>
+                    <option value="81">日本 (+81)</option>
+                    <option value="32">比利時 (+32)</option>
+                    <option value="1876">牙買加 (+1876)</option>
+                    <option value="972">以色列 (+972)</option>
+                    <option value="1">加拿大 (+1)</option>
+                    <option value="241">加彭 (+241)</option>
+                    <option value="1">北馬里安納群島 (+1)</option>
+                    <option value="974">卡達 (+974)</option>
+                    <option value="268">史瓦濟蘭 (+268)</option>
+                    <option value="227">尼日 (+227)</option>
+                    <option value="505">尼加拉瓜 (+505)</option>
+                    <option value="977">尼泊爾 (+977)</option>
+                    <option value="226">布吉納法索 (+226)</option>
+                    <option value="502">瓜地馬拉 (+502)</option>
+                    <option value="681">瓦利斯及福杜納群島 (+681)</option>
+                    <option value="220">甘比亞 (+220)</option>
+                    <option value="375">白俄羅斯 (+375)</option>
+                    <option value="370">立陶宛 (+370)</option>
+                    <option value="964">伊拉克 (+964)</option>
+                    <option value="354">冰島 (+354)</option>
+                    <option value="423">列支敦斯登 (+423)</option>
+                    <option value="36">匈牙利 (+36)</option>
+                    <option value="62">印尼 (+62)</option>
+                    <option value="91">印度 (+91)</option>
+                    <option value="253">吉布地 (+253)</option>
+                    <option value="686">吉里巴斯 (+686)</option>
+                    <option value="996">吉爾吉斯 (+996)</option>
+                    <option value="688">吐瓦魯 (+688)</option>
+                    <option value="246">地牙哥加西亞島 (+246)</option>
+                    <option value="1767">多米尼克 (+1767)</option>
+                    <option value="1806">多明尼加共和國 (+1806)</option>
+                    <option value="228">多哥 (+228)</option>
+                    <option value="1268">安地卡，巴布達 (+1268)</option>
+                    <option value="1">安圭拉 (+1)</option>
+                    <option value="244">安哥拉 (+244)</option>
+                    <option value="376">安道爾共和國 (+376)</option>
+                    <option value="690">托克勞群島 (+690)</option>
+                    <option value="1441">百慕達 (+1441)</option>
+                    <option value="251">衣索比亞 (+251)</option>
+                    <option value="34">西班牙 (+34)</option>
+                    <option value="385">克羅埃西亞 (+385)</option>
+                    <option value="504">宏都拉斯 (+504)</option>
+                    <option value="30">希臘 (+30)</option>
+                    <option value="966">沙烏地阿拉伯 (+966)</option>
+                    <option value="673">汶萊 (+673)</option>
+                    <option value="501">貝里斯 (+501)</option>
+                    <option value="229">貝南 (+229)</option>
+                    <option value="240">赤道幾內亞 (+240)</option>
+                    <option value="263">辛巴威 (+263)</option>
+                    <option value="374">亞美尼亞 (+374)</option>
+                    <option value="994">亞塞拜然 (+994)</option>
+                    <option value="255">坦尚尼亞 (+255)</option><option value="234">奈及利亞 (+234)</option><option value="58">委內瑞拉 (+58)</option><option value="880">孟加拉 (+880)</option><option value="260">尚比亞 (+260)</option><option value="680">帛琉 (+680)</option><option value="371">拉脫維亞 (+371)</option><option value="676">東加 (+676)</option><option value="670">東帝汶 (+670)</option><option value="387">波士尼亞及赫塞哥維納 (+387)</option><option value="267">波札那 (+267)</option><option value="1">波多黎各 (+1)</option><option value="48">波蘭 (+48)</option><option value="33">法國 (+33)</option><option value="298">法羅群島 (+298)</option><option value="262">法屬印度洋領土 (+262)</option><option value="594">法屬圭亞那 (+594)</option><option value="689">法屬玻里尼西亞 (+689)</option><option value="350">直布羅陀 (+350)</option><option value="254">肯亞 (+254)</option><option value="358">芬蘭 (+358)</option><option value="971">阿拉伯聯合大公國 (+971)</option><option value="54">阿根廷 (+54)</option><option value="968">阿曼 (+968)</option><option value="93">阿富汗 (+93)</option><option value="247">阿森松島 (+247)</option><option value="213">阿爾及利亞 (+213)</option><option value="355">阿爾巴尼亞 (+355)</option><option value="297">阿魯巴 (+297)</option><option value="359">保加利亞 (+359)</option><option value="7">俄羅斯 (+7)</option><option value="27">南非 (+27)</option><option value="672">南極大陸 (+672)</option><option value="82">南韓 (+82)</option><option value="855">柬埔寨 (+855)</option><option value="682">柯克群島 (+682)</option><option value="235">查德 (+235)</option><option value="591">玻利維亞 (+591)</option><option value="965">科威特 (+965)</option><option value="216">突尼西亞 (+216)</option><option value="962">約旦 (+962)</option><option value="1">美國 (+1)</option><option value="1">美屬維京群島 (+1)</option><option value="1">美屬薩摩亞 (+1)</option><option value="222">茅利塔尼亞 (+222)</option><option value="44">英國 (+44)</option><option value="1">英屬維爾京群島 (+1)</option><option value="233">迦納 (+233)</option><option value="852">香港 (+852)</option><option value="57">哥倫比亞 (+57)</option><option value="506">哥斯大黎加 (+506)</option><option value="590">哥德洛普島 (+590)</option><option value="20">埃及 (+20)</option><option value="47">挪威 (+47)</option><option value="299">格陵蘭 (+299)</option><option value="1473">格瑞納達 (+1473)</option><option value="66">泰國 (+66)</option><option value="509">海地 (+509)</option><option value="256">烏干達 (+256)</option><option value="380">烏克蘭 (+380)</option><option value="598">烏拉圭 (+598)</option><option value="998">烏茲別克 (+998)</option><option value="262">留尼旺 (+262)</option><option value="51">祕魯 (+51)</option><option value="677">索羅門群島 (+677)</option><option value="64">紐西蘭 (+64)</option><option value="683">紐威島 (+683)</option><option value="264">納米比亞 (+264)</option><option value="596">馬丁尼克島 (+596)</option><option value="223">馬利 (+223)</option><option value="60">馬來西亞 (+60)</option><option value="389">馬其頓 (+389)</option><option value="265">馬拉威 (+265)</option><option value="692">馬紹爾群島 (+692)</option><option value="261">馬達加斯加 (+261)</option><option value="356">馬爾他 (+356)</option><option value="960">馬爾地夫 (+960)</option><option value="691">密克羅尼西亞 (+691)</option><option value="420">捷克共和國 (+420)</option><option value="39">梵蒂岡 (+39)</option><option value="258">莫三比克 (+258)</option><option value="599">荷屬安地列斯 (+599)</option><option value="31">荷蘭 (+31)</option><option value="237">喀麥隆 (+237)</option><option value="995">喬治亞 (+995)</option><option value="224">幾內亞 (+224)</option><option value="245">幾內亞比索 (+245)</option><option value="679">斐濟群島 (+679)</option><option value="94">斯里蘭卡 (+94)</option><option value="386">斯洛伐尼亞 (+386)</option><option value="421">斯洛伐克 (+421)</option><option value="56">智利 (+56)</option><option value="63">菲律賓 (+63)</option><option value="84">越南 (+84)</option><option value="1345">開曼群島 (+1345)</option><option value="221">塞內加爾 (+221)</option><option value="248">塞席爾 (+248)</option><option value="357">塞普勒斯 (+357)</option><option value="381">塞爾維亞 (+381)</option><option value="992">塔吉克 (+992)</option><option value="43">奧地利 (+43)</option><option value="372">愛沙尼亞 (+372)</option><option value="353">愛爾蘭 (+353)</option><option value="65">新加坡 (+65)</option><option value="687">新喀里多尼亞群島 (+687)</option><option value="232">獅子山 (+232)</option><option value="41">瑞士 (+41)</option><option value="46">瑞典 (+46)</option><option value="678">萬那杜 (+678)</option><option value="39">義大利 (+39)</option><option value="508">聖匹島及麥克隆 (+508)</option><option value="1">聖文森及格瑞那丁 (+1)</option><option value="239">聖多美普林西比 (+239)</option><option value="1">聖克里斯多福及尼維斯 (+1)</option><option value="378">聖馬利諾 (+378)</option><option value="290">聖赫勒拿島 (+290)</option><option value="1758">聖露西亞 (+1758)</option><option value="967">葉門 (+967)</option><option value="269">葛摩 (+269)</option><option value="351">葡萄牙 (+351)</option><option value="500">福克蘭群島 (+500)</option><option value="238">維德角 (+238)</option><option value="886" selected="selected" >臺灣 (+886)</option><option value="976">蒙古 (+976)</option><option value="1664">蒙的塞拉特 (+1664)</option><option value="382">蒙特內哥羅 (+382)</option><option value="257">蒲隆地 (+257)</option><option value="592">蓋亞納 (+592)</option><option value="856">寮國 (+856)</option><option value="49">德國 (+49)</option><option value="212">摩洛哥 (+212)</option><option value="377">摩納哥 (+377)</option><option value="373">摩爾多瓦 (+373)</option><option value="230">模里西斯 (+230)</option><option value="961">黎巴嫩 (+961)</option><option value="52">墨西哥 (+52)</option><option value="853">澳門 (+853)</option><option value="61">澳洲 (+61)</option><option value="250">盧安達 (+250)</option><option value="674">諾魯 (+674)</option><option value="231">賴比瑞亞 (+231)</option><option value="266">賴索托 (+266)</option><option value="503">薩爾瓦多 (+503)</option><option value="685">薩摩亞 (+685)</option><option value="352">廬森堡 (+352)</option><option value="40">羅馬尼亞 (+40)</option><option value="1">關島 (+1)</option><option value="597">蘇利南莫河 (+597)</option></select> 
+                    <input type="text" name="MmobileNumber" id="idMobileNumber" value=""  autocomplete="off" size="10" />
+                </div>
+                </div>
+                備用電子信箱<input type="text" id="idBackupEmail" />
+           </fieldset>
+           <input type="button" value="建立帳號" id="btnCreateAccount" onclick="createAccount" />       
+        </form>
+	</div>
+	<!--end holder-->
+   <!--start holder-->
+   <div class="holder_content">
+      <section class="group4">
+         <h3>Latest article</h3>
+         <article>
+         <h4>22.08.2011  - Design to express </h4>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst.</p>
+         </article> 
+       </section>
+   </div>
+   <!--end holder-->
+   </div>
+   <!--end container-->
+   <!--start footer-->
+   <footer>
+      <div class="container">  
+         <div id="FooterTwo"> © 2011 Minimalism </div>
+         <div id="FooterTree"> Valid html5, design and code by <a href="http://www.marijazaric.com">marija zaric - creative simplicity</a> </div> 
+      </div>
+   </footer>
+   <!--end footer-->
+   </div>
+   <!--end bg-->
+   <!-- Free template distributed by http://freehtml5templates.com -->
+
+
+
+
+
+
+
+
+</body>
+</html>

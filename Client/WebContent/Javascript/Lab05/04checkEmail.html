@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>04checkEmail.html</title>	
+		<script>
+			function chk(){
+				//password check
+			    var thePwd=document.getElementById("idPwd").value;
+			    var PwdChar;
+			    var sw1=false,sw2=false;
+			    
+			    if(thePwd.length>=6){
+			    	for(var i=0;i<thePwd.length;i++){
+			    		PwdChar=thePwd[i].toUpperCase();
+			    		if(PwdChar>="0" & PwdChar<="9")
+			    			sw1=true;
+			    		else if(PwdChar>="A" & PwdChar<="Z")
+			    			sw2=true;
+			    		else{
+			    			sw1=false;
+			    			sw2=false;
+			    			break;
+			    		}
+			    	}
+			    	if(sw1 & sw2) alert("correct"); else alert("incorrect");
+			    }
+			    else
+			    	alert("Password must be greater than 6");
+			    
+			    //email check
+			    var theEmail=document.getElementById("idEmail").value;
+			    
+			    if(theEmail.indexOf("@")==-1)
+			    	alert("must be include \"@\" ");
+			    else if (theEmail.indexOf(".")==-1)
+			    	alert("must be include \".\" ");
+			    else
+			    	alert("Email="+theEmail);
+			}
+		</script>	
+	</head>
+
+	<body>
+	    Password:<input type="text" id="idPwd" size="6"/><br/>
+		Email:<input type="text" id="idEmail" size="30" maxlength="30"/><br/>		
+		<input type="button" value="check" onclick="chk();"/>
+		
+	</body>
+</html>

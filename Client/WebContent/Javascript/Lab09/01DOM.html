@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>01DOM</title>
+		
+		<link rel="icon" type="image/png" href="http://127.0.0.1:8020/JSEEIT70/Lab09/ajax-icon.png" />
+	<!--	  
+        <link rel="shortcut icon" href="Treetog-File-Type-Html.ico" />
+   //for IE -->    
+		<script type="text/javascript">
+			window.onload=function(){
+				
+			    // alert(document.nodeType);   //9
+			    // alert(document.nodeName);   //#document
+			    // alert(document.nodeValue);  //null
+			    
+			    var root=document.documentElement;  //html
+			    // alert(root.nodeType);   //1
+			    // alert(root.nodeName);   //HTML
+			    // alert(root.nodeValue);  //null
+			    
+			    var theBody=root.childNodes[1];
+			    //alert(theBody.nodeName);  //BODY
+			    //alert(theBody.childNodes[1].nodeName);  //P
+			    
+			    // alert(theBody.childNodes[1].firstChild.nodeValue);  //I am a JavaScript
+			    // alert(theBody.childNodes[1].firstChild.nodeType);   //3
+			    // alert(theBody.childNodes[1].firstChild.nodeName);   //#text
+			    
+			    var theNode=root.childNodes[1].childNodes[3].childNodes[3];   //LI bbbbbb
+			    //alert(theNode.nodeName);
+			    //alert(theNode.firstChild.nodeValue); //bbbbb
+			    
+			    //alert(theNode.previousSibling.previousSibling.firstChild.nodeValue);   //aaaaa
+			    //alert(theNode.nextSibling.nextSibling.firstChild.nodeValue);  //ccccc
+			    
+			    //alert(theNode.parentNode.nodeName); //UL
+			    //alert(theNode.parentNode.lastChild.previousSibling.nodeName);  //LI  ffffff
+			    
+			    //alert(theNode.parentNode.lastChild.previousSibling.firstChild.nodeValue);  //fffff
+			    
+			    //var listNode=document.getElementsByTagName("li");
+			    //alert(listNode.length);   //6
+			    //for(var i=0;i<listNode.length;i++){
+			    	//alert(listNode.item(i).firstChild.nodeValue);
+			    	//alert(listNode[i].firstChild.nodeValue);
+			   //}
+			}
+			
+		</script>	
+	</head><body><h1>Hello DOM</h1><p>I am a JavaScript</p>
+	<ul>
+		<li>aaaaa</li>
+		<li>bbbbb</li>
+		<li>ccccc</li>
+		<li>ddddd</li>
+		<li>eeeee</li>
+		<li>fffff</li>
+	</ul>
+	<!--
+	<link rel="shortcut icon" href="http://example.com/myicon.ico" />
+	-->
+		
+	</body>
+</html>

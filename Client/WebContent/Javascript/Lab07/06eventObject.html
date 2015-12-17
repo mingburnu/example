@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>06eventObject.html</title>	
+		<script>
+		
+           //document.onmousedown=mouseDown;
+           // function mouseDown(){
+             // alert(event.screenX+","+event.screenY);
+               // alert(event.type);
+               // alert(event.button);
+//                
+           // }
+           // function mouseDown(nsevent){           
+               // alert(nsevent.screenX+","+nsevent.screenY);
+                // alert(nsevent.type);
+                // alert(nsevent.button);
+            // }
+            
+            
+           // function mouseDown(nsevent){   
+           		// //var theEvent=nsevent?nsevent:window.event;           		          		
+           		// var theEvent=nsevent||window.event;      
+                // alert(theEvent.screenX+","+theEvent.screenY);
+                // alert(theEvent.clientX+","+theEvent.clientY);
+                // alert(theEvent.offsetX+","+theEvent.offsetY);
+                // //alert(theEvent.type);
+                // //alert(theEvent.button);
+            // }
+          
+          
+           // document.onkeydown=keyDown;
+           // function keyDown(nsevent){
+               // var theEvent=nsevent||window.event;  
+               // alert(theEvent.keyCode);             
+               // if(theEvent.altKey) alert("ALT");
+               // if(theEvent.ctrlKey) alert("CTRL");
+               // if(theEvent.shiftKey) alert("SHIFT");
+           // }
+           
+          window.onload=function(){
+          	document.getElementById("idp").onclick=myfunction;
+          	document.getElementById("idspan").onclick=clickSpan;
+          }
+           function myfunction(nsevent){
+           		 var theEvent=nsevent||window.event; 
+           		 //alert("target p="+theEvent.target);  //span
+           		alert("currentTarget p="+theEvent.currentTarget);  //p
+           }
+          function clickSpan(nsevent){
+          		var theEvent=nsevent||window.event; 
+          		//alert("target span="+theEvent.target);  //span
+          		alert("currentTarget span="+theEvent.currentTarget);  //span
+          }
+		</script>	
+	</head>
+
+	<body>
+		<p id="idp">
+             <a href="#">some <span id="idspan" >text</span></a>            
+        </p>
+        
+        
+	</body>
+</html>

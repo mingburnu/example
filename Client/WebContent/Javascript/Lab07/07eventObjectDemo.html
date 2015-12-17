@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>07eventObjectDemo.html</title>	
+		<script>
+			document.title="III";
+			document.oncontextmenu=function(){
+				return false;
+				// if(event.preventDefault)
+					// event.preventDefault();
+				// else
+					// event.returnValue=false;
+			}
+		</script>	
+	</head>
+  
+	<body>
+		this is test line<br/>
+		<img src="WindowObject/image/101.gif"/>
+		<a href="http://www.google.com" onclick="return false;">google</a>
+		<br><br><br>
+		
+	</body>
+</html>

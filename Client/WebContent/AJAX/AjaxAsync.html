@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Async</title>
+<style>
+  #img1{display:none}
+</style>
+</head>
+<body>
+<input type="text"><br>
+<input type="text"><br>
+<input type="text"><br>
+<input type="button" value="Load" id="buttonLoad">
+<img src="Images/ajax-loader.gif" id="img1">
+<div id="div1"></div>
+<script>
+ 
+var btnLoad = document.getElementById("buttonLoad");
+btnLoad.addEventListener("click", load, false);
+var xmlHttp;
+function load(){
+	 //開始Ajax程式
+	 //步驟一建立XMLHttpRequest物件
+	 xmlHttp = new XMLHttpRequest();
+	 
+	 //步驟二對Server端發出要求
+	 //當readyState屬性值改變時,就會觸發readystatechange事件
+	 xmlHttp.addEventListener("readystatechange",callback,false);
+	 xmlHttp.open("get", "http://localhost:8080/MySite/CORSServlet", true);  //true表示非同步
+	 xmlHttp.send();
+ 
+}
+function callback(){
+	//console.log(xmlHttp.readyState);
+	//readyState == 4表示了server端已經回傳資料到Client端了	
+	if(xmlHttp.readyState == 1){
+		//console.log("aa");
+		document.getElementById("img1").style.display = "inline";
+	}
+	else if(xmlHttp.readyState == 4){
+		document.getElementById("img1").style.display = "none";
+		//xmlHttp.status == 200表示Server端程式執行沒有錯誤
+		if(xmlHttp.status == 200){
+			//步驟三接收Server端回應的資料
+			var data = xmlHttp.responseText;
+			 
+			 //將資料顯示在網頁上
+			 var myDiv = document.getElementById("div1");
+			 myDiv.innerHTML = "<h2>" + data + "</h2>";
+		}else{
+			alert(xmlHttp.status + ":" + xmlHttp.statusText);
+		}
+	}
+}
+</script>
+</body>
+</html>

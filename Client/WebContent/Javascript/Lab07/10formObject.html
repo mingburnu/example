@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>10formObject.html</title>	
+		<script>
+			window.onload=function(){
+				document.getElementById("idbutton").onclick=check;
+				document.getElementById("idsubmit").onclick=submitf;
+			}
+			function check(){
+				//alert(document.forms[0].elements[1].value);
+				//alert(document.forms[0].elements.length);
+				for(var i=0;i<document.forms[0].elements.length;i++){
+					if(document.forms[0].elements[i].checked){
+						alert(document.forms[0].elements[i].value);
+					}
+				}
+			}
+			function submitf(){
+				var theName=document.forms[0].elements[0].value;
+				if(theName=="")
+					//alert("not blank");
+					document.getElementById("idsp").innerHTML="not blank";
+				else
+					document.forms[0].submit();
+			}
+		</script>	
+	</head>
+  
+	<body>
+		<form action="get.jsp" method="get">
+			name:<input type="text" name="txtName" value="abc" /><span id="idsp"></span><br/>
+			<input type="checkbox" name="hobby" checked="checked" value="reading">reading
+			<input type="checkbox" name="hobby" value="game">game
+			<input type="checkbox" name="hobby" value="sleep">sleep
+			<br/>
+			
+			<input id="idbutton" type="button" value="check"  />
+			<input id="idsubmit" type="button" value="submit"  />
+		</form>
+	</body>
+</html>

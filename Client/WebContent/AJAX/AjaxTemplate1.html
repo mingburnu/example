@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Template</title>
+</head>
+<body>
+<input type="button" value="Load" id="buttonLoad">
+
+<script>
+ 
+ var btnLoad = document.getElementById("buttonLoad");
+ btnLoad.addEventListener("click", load, false);
+ var xhr;
+ function load(){
+	 //開始Ajax程式
+	 //XMLHttpRequest
+	 
+	 //步驟一 建立XMLHttpRequest
+	 //要注意舊版的IE使用的問題, IE7以下
+	 xhr = new XMLHttpRequest();
+	 
+	 //步驟二 對Server端發出要求
+	 //open()方法
+	 //第一個參數 get or post
+	 //第二個參數表示Server端的程式,有可能是JSP or Sevelet
+	 //第三個參數 true 表示非同步的意思
+	 
+	 //如果使用post方法傳遞資料,有幾個與get不同的地方
+	 //1.open()方法第一個參數改成post
+	 //2.設定request header xhr.setRequestHader("Content-Type","application/x-www-form-urlencoded")
+	 //3.傳遞的資料要放在send()方法裡面  send("name=Jack&age=20")
+	 
+	 //非同步的要求,除了open()方法第三個參數要設定成 true之外
+	 //還要綁定一個readystatechange的事件
+	 //這個事件會根據readyState屬性值得改變而被觸發
+	 //readyState的值是4的時候,表示server端已經回傳了資料
+	 //xhr.onreadystatechange =callback;
+	 xhr.addEventListener("readystatechange",callback,false);
+	 xhr.open("get","First.jsp",true)
+	 xhr.send();
+	 
+	 
+	 
+	 
+ }
+ 
+ //用來接收Sever端回傳的資料
+ function callback(){
+	 //步驟三接收資料
+	 //readyState的值是4的時候,表示server端已經回傳了資料
+	 if(xhr.readyState == 4){
+		 //判斷Server端程式執行是沒有錯誤的
+		 if(xhr.status == 200){
+	        var data = xhr.responseText;
+	        
+	        //收到資料如何顯示在網頁上
+		 }
+	 }
+	 
+ }
+</script>
+</body>
+</html>
