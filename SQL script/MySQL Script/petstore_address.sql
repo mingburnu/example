@@ -1,0 +1,59 @@
+CREATE DATABASE  IF NOT EXISTS `petstore` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `petstore`;
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+--
+-- Host: localhost    Database: petstore
+-- ------------------------------------------------------
+-- Server version	5.5.36
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `address` (
+  `addressId` varchar(10) NOT NULL,
+  `street1` varchar(55) NOT NULL,
+  `street2` varchar(55) DEFAULT NULL,
+  `city` varchar(55) NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `zip` varchar(5) NOT NULL,
+  `latitude` decimal(14,10) NOT NULL,
+  `longitude` decimal(14,10) NOT NULL,
+  PRIMARY KEY (`addressId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES ('1','W el Camino Real & Castro St','','Mountain View','CA','94040',37.3857400000,-122.0839730000),('10','W el Camino Real & Hollenbeck Ave','','Sunnyvale','CA','94087',37.3699410000,-122.0412710000),('100','Leavesley Rd & Monterey Rd','','Gilroy','CA','95020',37.0194470000,-121.5749530000),('101','Cesar Chavez St & Sanchez','','San Francisco','CA','94131',37.7475300000,-122.4289820000),('102','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('11','S Main St & Serra Way','','Milpitas','CA','95035',37.4281120000,-121.9065050000),('12','Great Mall Pky & S Main St','','Milpitas','CA','95035',37.4147220000,-121.9020850000),('13','Valencia St &  16th St','','San Francisco','CA','94103',37.7649850000,-122.4218860000),('14','S 1st St & W Santa Clara St','','San Jose','CA','95113',37.3361410000,-121.8906660000),('15','Bay Street and Columbus Ave ','','San Francisco','CA','94133',37.8053280000,-122.4168820000),('16','El Camino Real & Scott Blvd','','Santa Clara','CA','95050',37.3521410000,-121.9595690000),('17','Millbrae Ave &  Willow Ave','','Millbrae ','CA','94030',37.5966350000,-122.3910830000),('18','Leavesley Rd & Monterey Rd','','Gilroy','CA','95020',37.0194470000,-121.5749530000),('19','S Main St & Serra Way','','Milpitas','CA','95035',37.4281120000,-121.9065050000),('2','Shell Blvd & Beach Park Blvd','','Foster City','CA','94404',37.5469350000,-122.2639780000),('20','24th St &  Dolores St','','San Francisco','CA','94114',37.7518300000,-122.4249820000),('21','Great Mall Pky & S Main St','','Milpitas','CA','95035',37.4147220000,-121.9020850000),('22','Grant Rd & South Dr ','','Mountain view','CA','94040',37.3669410000,-122.0780730000),('23','25th St &  Dolores St','','San Francisco','CA','94114',37.7501300000,-122.4247820000),('24','Ellis St & National Ave','','Mountain view','CA','94043',37.4009400000,-122.0522720000),('25','1st St & Market St ','','San Francisco','CA','94105',37.7910280000,-122.3990820000),('26','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('27','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('28','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('29','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('3','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('30','Leavesley Rd & Monterey Rd','','Gilroy','CA','95020',37.0194470000,-121.5749530000),('31','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('32','Millbrae Ave &  Willow Ave','','Millbrae ','CA','94030',37.5966350000,-122.3910830000),('33','Cesar Chavez St & Sanchez','','San Francisco','CA','94131',37.7475300000,-122.4289820000),('34','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('35','Bay Street and Columbus Ave ','','San Francisco','CA','94133',37.8053280000,-122.4168820000),('36','Telegraph Ave & Bancroft Way','','Berkeley','CA','94704',37.8688250000,-122.2597800000),('37','1st St & Market St ','','San Francisco','CA','94105',37.7910280000,-122.3990820000),('38','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('39','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('4','S 1st St & W Santa Clara St','','San Jose','CA','95113',37.3361410000,-121.8906660000),('40','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('41','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('42','4th St & Howard St','','San Francisco','CA','94103',37.7832290000,-122.4025820000),('43','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('44','Campbell St & Riverside Ave','','Santa Cruz','CA','95060',36.9698500000,-122.0194730000),('45','Cesar Chavez St & Sanchez','','San Francisco','CA','94131',37.7475300000,-122.4289820000),('46','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('47','W el Camino Real & S Mary Ave','','Sunnyvale','CA','94087',37.3716410000,-122.0487720000),('48','Telegraph Ave & Bancroft Way','','Berkeley','CA','94704',37.8688250000,-122.2597800000),('49','1st St & Market St ','','San Francisco','CA','94105',37.7910280000,-122.3990820000),('5','1st St & Market St ','','San Francisco','CA','94105',37.7910280000,-122.3990820000),('50','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('51','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('52','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('53','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('54','4th St & Howard St','','San Francisco','CA','94103',37.7832290000,-122.4025820000),('55','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('56','W el Camino Real & S Mary Ave','','Sunnyvale','CA','94087',37.3716410000,-122.0487720000),('57','Campbell St & Riverside Ave','','Santa Cruz','CA','95060',36.9698500000,-122.0194730000),('58','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('59','Bay Street and Columbus Ave ','','San Francisco','CA','94133',37.8053280000,-122.4168820000),('6','Paseo Padre Pky & Fremont Blvd','','Fremont','CA','94555',37.5750350000,-122.0412730000),('60','Telegraph Ave & Bancroft Way','','Berkeley','CA','94704',37.8688250000,-122.2597800000),('61','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('62','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('63','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('64','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('65','W el Camino Real & S Mary Ave','','Sunnyvale','CA','94087',37.3716410000,-122.0487720000),('66','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('67','Millbrae Ave &  Willow Ave','','Millbrae ','CA','94030',37.5966350000,-122.3910830000),('68','Cesar Chavez St & Sanchez','','San Francisco','CA','94131',37.7475300000,-122.4289820000),('69','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('7','W el Camino Real & S Mary Ave','','Sunnyvale','CA','94087',37.3716410000,-122.0487720000),('70','Bay Street and Columbus Ave ','','San Francisco','CA','94133',37.8053280000,-122.4168820000),('71','Leavesley Rd & Monterey Rd','','Gilroy','CA','95020',37.0194470000,-121.5749530000),('72','Campbell St & Riverside Ave','','Santa Cruz','CA','95060',36.9698500000,-122.0194730000),('73','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('74','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('75','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('76','4th St & Howard St','','San Francisco','CA','94103',37.7832290000,-122.4025820000),('77','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('78','Millbrae Ave &  Willow Ave','','Millbrae ','CA','94030',37.5966350000,-122.3910830000),('79','Campbell St & Riverside Ave','','Santa Cruz','CA','95060',36.9698500000,-122.0194730000),('8','Bay Street and Columbus Ave ','','San Francisco','CA','94133',37.8053280000,-122.4168820000),('80','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('81','Grant Rd & South Dr ','','Mountain view','CA','94040',37.3669410000,-122.0780730000),('82','Telegraph Ave & Bancroft Way','','Berkeley','CA','94704',37.8688250000,-122.2597800000),('83','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('84','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('85','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('86','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('87','4th St & Howard St','','San Francisco','CA','94103',37.7832290000,-122.4025820000),('88','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000),('89','Millbrae Ave &  Willow Ave','','Millbrae ','CA','94030',37.5966350000,-122.3910830000),('9','El Camino Real & Scott Blvd','','Santa Clara','CA','95050',37.3521410000,-121.9595690000),('90','Paseo Padre Pky & Fremont Blvd','','Fremont','CA','94555',37.5750350000,-122.0412730000),('91','University Ave & Middlefield Rd','','Palo Alto','CA','94301',37.4506380000,-122.1569750000),('92','El Camino Real & Scott Blvd','','Santa Clara','CA','95050',37.3521410000,-121.9595690000),('93','Telegraph Ave & Bancroft Way','','Berkeley','CA','94704',37.8688250000,-122.2597800000),('94','San Antonio Rd & Middlefield Rd','','Palo Alto','CA','94303',37.4162390000,-122.1034740000),('95','20th St &  Dolores St','','San Francisco','CA','94114',37.7582300000,-122.4255820000),('96','River Oaks Pky & Village Center Dr','','San Jose','CA','95134',37.3982590000,-121.9223670000),('97','Dolores St &  San Jose Ave','','San Francisco','CA','94110',37.7402300000,-122.4237820000),('98','Campbell St & Riverside Ave','','Santa Cruz','CA','95060',36.9698500000,-122.0194730000),('99','Palm Dr & Arboretum Rd','','Stanford','CA','94305',37.4378380000,-122.1669750000);
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-05-01 20:25:48
