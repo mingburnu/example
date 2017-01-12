@@ -1,1 +1,1 @@
-%JAVA_HOME%\bin
+Eclipse IDE for Java EE Developers Projects
