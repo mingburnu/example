@@ -40,3 +40,7 @@
 /HelloWeb/build
 /Client/build
 /BasicAutheiticationScheme/build
+/springdatamongodb/target
+/GuestBook/target
+/RESTClient/classes
+/GAE/war/WEB-INF/classes
